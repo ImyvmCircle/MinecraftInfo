@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="/static/javascript/general.js"></script>
+    <script type="application/javascript">
+        function jx() {
+            $.post("/pages/main/index/jx", {
+                _xsrf: getCookie("_xsrf")
+            }, function (datas) {
+                alert(datas.message)
+            }, "json")
+        }
+    </script>
+</head>
+<body>
+{% raw xsrf_form_html() %}
+<button onclick="jx()">ok</button>
+</body>
+</html>
