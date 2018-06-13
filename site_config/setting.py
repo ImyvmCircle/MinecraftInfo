@@ -10,6 +10,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 PAGES_DIR = os.path.join(os.path.dirname(__file__), '../pages/').replace('\\', '/')
 ADV_DIR = os.path.join(os.path.dirname(__file__), '../advancements/').replace('\\', '/')
 STATS_DIR = os.path.join(os.path.dirname(__file__), '../stats/').replace('\\', '/')
+PLAYERDATA_DIR = os.path.join(os.path.dirname(__file__), '../playerdata/').replace('\\', '/')
 STATIC_DIR = os.path.join(os.path.dirname(__file__), '../static/').replace('\\', '/')
 LOG_ROOT = os.path.join(os.path.dirname(__file__), '../log/').replace('\\', '/')
 

@@ -3,6 +3,7 @@
 from __future__ import print_function
 import gridfs
 import mysql.connector
+import sys
 
 from site_config.setting import dbconfig
 
@@ -441,7 +442,8 @@ def saveData(valueList):
     try:
         if not len(valueList):
             return False
-        for item in valueList:
+        total = len(valueList)
+        for num, item in enumerate(valueList):
             if item == []:
                 continue
             sql = ""
@@ -504,6 +506,8 @@ def saveData(valueList):
                 sql = "delete from " + tabName + " where 1=1 " + sqlWhere + ";"
             assert isinstance(sqlItem + sqlWitem, list)
             cursor.execute(sql, tuple(sqlItem + sqlWitem))
+            sys.stdout.write("\r共" + str(total) + "条数据,正在处理第" + str(num) + "条数据")
+            sys.stdout.flush()
         conn.commit()
         mysqlClose(cursor, conn)
         return True
