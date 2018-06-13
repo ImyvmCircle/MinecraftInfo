@@ -54,7 +54,7 @@ class loadUserListHandler(RequestHandler):
         total = sqlreadone(tsql + sqlwhere)["num"]
         sql += sqlwhere + " order by updatetime desc limit %s, %s" % ((page - 1) * rows, rows)
         items = sqlread(sql)
-        return self.write(json.dumps({"rows": items, "total": total, 'pages': math.ceil(total/rows)}, cls=JsonEncoder))
+        return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
 
 class JXHandler(RequestHandler):

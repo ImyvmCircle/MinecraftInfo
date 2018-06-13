@@ -10,6 +10,7 @@ $(function () {
     page = pager.index;
     pager.onclick = function (index,size) {
         page = index;
+        loaddata();
     };
     loaddata('first');
 });

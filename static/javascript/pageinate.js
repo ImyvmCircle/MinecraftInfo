@@ -139,8 +139,8 @@ function PagerView(id,targetid) {
         for (var i = start; i <= end; i++) {
             if (i == this.index) {
                 str += '<li class="active"><a href="#">'+i+'</a></li>';
-            } else if ((i == this.index+1 || i == this.index-1) ){
-                str += '<li class="active"><a href="javascript://' + i + '">'+i+'</a></li>';
+            } else if ((i <= this.index+3 || i >= this.index-3) ){
+                str += '<li><a href="javascript://' + i + '">'+i+'</a></li>';
             }
         }
         if (self.pageCount > 1) {
@@ -191,6 +191,6 @@ function PagerView(id,targetid) {
         //         self._onclick(self.pageCount, Number(self.itemCount)%Number(self.size));
         //     }
         // };
-        //window.scrollTo(0,document.getElementById(targetid).offsetTop);
+        window.scrollTo(0,document.getElementById(targetid).offsetTop);
     };
 }
