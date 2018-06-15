@@ -39,7 +39,10 @@ portsandlink = {
 # mysql 数据库连接
 dbconfig = {
     'user': 'root',
+    'password': 'Imyvm@20180131',
+    'host': '222.186.134.251',
     'database': 'userinfo',
+    'port': '3306',
 }
 
 SYSNAME = '我的世界信息平台'
