@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>我的世界信息库</title>
+    <link rel="stylesheet" type="text/css" href="/static/javascript/bootstrap/css/bootstrap.css">
+
+    <script src="/static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="/static/javascript/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/javascript/pageinate.js"></script>
+    <script src="/static/javascript/general.js"></script>
+    <script src="/pages/index/main.js"></script>
+    <style>
+        .rank {
+            box-sizing: border-box;
+            margin-top: 10px;
+            text-align: center;
+            box-shadow: 0 1px 3px #BBB;
+            color: #fff;
+            background: url("/static/images/tbg.png") repeat center;
+            padding-top: 1px;
+        }
+
+        .rank ol {
+            padding-right: 30px;
+        }
+    </style>
+</head>
+<body>
+{% raw xsrf_form_html() %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <input id="input-none" type="text" placeholder="" class="form-control"
+                       onchange="SearchuUser(this.value)">>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <!--<div class="container">-->
+
+    <!--<p>This is a template for a simple marketing or informational website. It includes a large callout called a-->
+    <!--jumbotron and three supporting pieces of content. Use it as a starting point to create something more-->
+    <!--unique.</p>-->
+    <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>-->
+    <!--</div>-->
+
+
+    <div class="container">
+        <h2>记录排行</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="rank">
+                    <h4>在线时长</h4>
+                    <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                        {% for i in zxsc %}
+                        <li>
+                            <div style="display: none">{{ i["id"] }}</div>
+                            <div style="float: left;">{{ i["uname"] }}</div>
+                            <div style="float: right;">{{ i["sc"] }}</div>
+                        </li>
+                        {% end %}
+                    </ol>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="rank">
+                    <h4>钻石矿开采</h4>
+                    <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                        {% for i in zskkc %}
+                        <li>
+                            <div style="display: none">{{ i["id"] }}</div>
+                            <div style="float: left;">{{ i["uname"] }}</div>
+                            <div style="float: right;">{{ i["cs"] }}次</div>
+                        </li>
+                        {% end %}
+                    </ol>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>初次登陆时间</th>
+                <th>最后离线时间</th>
+                <th>数据更新日期</th>
+            </tr>
+            </thead>
+            <tbody id="userlist">
+            <tr onclick="lookinfo('@id')">
+                <td>@@rowsnumber@@</td>
+                <td>@uname</td>
+                <td>@firstplayed</td>
+                <td>@lastplayed</td>
+                <td>@updatetime</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
+    </nav>
+
+    <hr>
+
+    <footer>
+        <p>健健技术支持</p>
+    </footer>
+</div> <!-- /container -->
+
+</body>
+</html>
