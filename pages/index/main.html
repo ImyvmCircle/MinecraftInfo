@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/static/javascript/bootstrap/css/bootstrap.css">
+
+    <script src="/static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="/static/javascript/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/javascript/pageinate.js"></script>
+    <script src="/static/javascript/general.js"></script>
+    <script src="/pages/index/main.js"></script>
+</head>
+<body>
+{% raw xsrf_form_html() %}
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right">
+                <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-success">Sign in</button>
+            </form>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+            jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+            unique.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>初次登陆时间</th>
+                <th>最后离线时间</th>
+                <th>数据更新日期</th>
+            </tr>
+            </thead>
+            <tbody id="userlist">
+            <tr>
+                <td>@@rowsnumber@@</td>
+                <td>@uname</td>
+                <td>@firstplayed</td>
+                <td>@lastplayed</td>
+                <td>@updatetime</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
+    </nav>
+
+    <hr>
+
+    <footer>
+        <p>健健技术支持</p>
+    </footer>
+</div> <!-- /container -->
+
+</body>
+</html>
