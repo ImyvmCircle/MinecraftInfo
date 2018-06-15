@@ -11,13 +11,17 @@ import random
 import hashlib
 import math
 import tornado.gen
-from site_config.setting import LOG_ROOT
+from site_config.setting import LOG_ROOT, SYSNAME, SYSCOLOR
 
 
 def get_systemname():
-    value = "恒大企业智能管理系统"
-    # value = "测试"
+    value = SYSNAME
     return value
+
+
+# 颜色配置
+def get_syscolor():
+    return SYSCOLOR
 
 
 # 取得copyright

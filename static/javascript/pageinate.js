@@ -9,7 +9,7 @@ function PagerView(id,targetid) {
     this.container = null;
     this.index = 1; // 当前页码, 从1开始
     this.size = 20; // 每页显示记录数
-    this.maxButtons = 9; // 显示的分页按钮数量
+    this.maxButtons = 5; // 显示的分页按钮数量
     this.itemCount = 0; // 记录总数
     this.pageCount = 0; // 总页数
     this.targetHttp = document.getElementById(targetid).innerHTML; //得到原始标签组
@@ -74,8 +74,7 @@ function PagerView(id,targetid) {
         {
             self.index = 1;
         }
-        var n = (self.index - 1) * self.size;
-        for(var j=n;j<size+n;j++) {
+        for(var j=0;j<size;j++) {
             var row = rows[j];
             var temp = String(self.targetHttp);
             for(var r in row){
@@ -95,8 +94,8 @@ function PagerView(id,targetid) {
     this._onclick = function (index,size) {
         self.index = index;
         self.onclick(index,size);
-        self._rowssplit(self.rows,size);
-        self.render();
+        // self._rowssplit(self.rows,size);
+        // self.render();
     };
 
     /**
@@ -139,7 +138,7 @@ function PagerView(id,targetid) {
         for (var i = start; i <= end; i++) {
             if (i == this.index) {
                 str += '<li class="active"><a href="#">'+i+'</a></li>';
-            } else if ((i <= this.index+3 || i >= this.index-3) ){
+            } else if ((i <= this.index+2 || i >= this.index-2) ){
                 str += '<li><a href="javascript://' + i + '">'+i+'</a></li>';
             }
         }
@@ -150,19 +149,15 @@ function PagerView(id,targetid) {
                 str += '<li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
             }
         }
-        // str += "</li>";
-        // str +='<li class="pagerConctrl" style="margin-right: 10px;"><div class="div-inline">' +
-        //     '<label for="pageFocusIndex">跳转到</label>' +
-        //     '<input id="pageFocusIndex" type="text"/>' +
-        //     '</div><span class="pagerBtn div-inline btnBlue" style="padding: 0;">GO</span>' +
-        //     '</li>';
-        // str += '<li class="pageCount"> <label for="pageFocusIndex">共' + self.pageCount + '页, ' + self.itemCount + '条记录 </label></li>';
+        str +='<li class="form-inline" style="padding-left: 20px;"><div class="form-group"><label for="btnGo">跳转到</label>' +
+            '<input type="text" class="form-control" id="btnGo" style="width: 45px;margin: 0 5px;"><button type="button" class="btn btn-default btn-sm" style="margin: 2px 2px">GO</button>' +
+            '<label>共 '+self.pageCount+' 页, ' + self.itemCount + '条记录</label></div></li>';
         str += '</ul>';
         self.container.innerHTML = str;
         var li_list = self.container.getElementsByTagName('li');
         for (var i = 0; i < li_list.length; i++) {
             li_list[i].onclick = function () {
-                var index = this.getAttribute('href');
+                var index = this.firstElementChild.getAttribute("href");
                 if (index != undefined && index != '') {
                     index = parseInt(index.replace('javascript://', ''));
                     if(index<self.pageCount) {
@@ -175,22 +170,22 @@ function PagerView(id,targetid) {
                 return false;
             };
         }
-        // var btnGo = self.container.getElementsByTagName('span');
-        // var inputGo = self.container.getElementsByTagName('input');
-        // btnGo[0].onclick = function(){
-        //     if(inputGo[0].value<self.pageCount)
-        //     {
-        //         self._onclick(inputGo[0].value,self.size);
-        //     }
-        //     //else if(inputGo[0].value==self.pageCount)
-        //     //{
-        //     //    self._onclick(self.pageCount, Number(self.itemCount)%Number(self.size));
-        //     //}
-        //     else
-        //     {
-        //         self._onclick(self.pageCount, Number(self.itemCount)%Number(self.size));
-        //     }
-        // };
+        var btnGo = self.container.getElementsByTagName('button');
+        var inputGo = self.container.getElementsByTagName('input');
+        btnGo[0].onclick = function(){
+            if(inputGo[0].value<self.pageCount)
+            {
+                self._onclick(inputGo[0].value,self.size);
+            }
+            //else if(inputGo[0].value==self.pageCount)
+            //{
+            //    self._onclick(self.pageCount, Number(self.itemCount)%Number(self.size));
+            //}
+            else
+            {
+                self._onclick(self.pageCount, Number(self.itemCount)%Number(self.size));
+            }
+        };
         window.scrollTo(0,document.getElementById(targetid).offsetTop);
     };
 }

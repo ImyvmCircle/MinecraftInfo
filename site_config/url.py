@@ -10,6 +10,7 @@ application = tornado.web.Application(handlers=url_wrapper([
     # (r"/pages/(.*\.js)$", StaticFileHandler, {"path": PAGES_DIR}),
     (r"(.*\.js)$", 'pages.index.main.PcJsHandler'),  # 静态目录配置目录下配置
     (r"/pages", include('pages')),
+    (r"/base", include('base')),
 ]), **settings)
 
 # 主页面调用

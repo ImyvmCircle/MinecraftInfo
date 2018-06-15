@@ -12,7 +12,7 @@ $(function () {
         page = index;
         loaddata();
     };
-    loaddata('first');
+    loaddata();
 });
 
 function jx() {
@@ -23,9 +23,17 @@ function jx() {
     }, "json")
 }
 
-function loaddata(lx) {
-    $.post("/pages/main/index/loaduserlist", {_xsrf: getCookie("_xsrf"), rows:rows, page:page}, function (datas) {
+function loaddata(value) {
+    $.post("/pages/main/index/loaduserlist", {_xsrf: getCookie("_xsrf"), rows:rows, page:page, value:value}, function (datas) {
         pager.loaddata(datas);
         pager.render();
     },"json")
+}
+
+function SearchuUser(value) {
+    loaddata(value)
+}
+
+function lookinfo(objid) {
+    alert(objid)
 }

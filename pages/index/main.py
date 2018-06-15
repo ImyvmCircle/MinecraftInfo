@@ -1,24 +1,32 @@
 # -*- coding: utf-8 -*-
-import urllib.request
-
 from general.project_general import get_serial, JsonEncoder
 from site_config.dblink import saveData, sqlread, sqlreadone
 import sys
 import time
-__author__ = 'Jian'
 import json
 import datetime
 import os
 from site_config.BaseHandler import RequestHandler
 from site_config.setting import PAGES_DIR, STATS_DIR, PLAYERDATA_DIR, ADV_DIR
 from nbtlib import nbt
-import math
+
+
+__author__ = 'Jian'
+
+
 tablename = ""
 
 
 class IndexHandler(RequestHandler):
     def setget(self, *args, **kwargs):
-        return self.render(os.path.join(PAGES_DIR, 'index\\main.html').replace('\\', '/'))
+        zxsc = sqlread("SELECT a.cs,b.uname,b.id from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.playOneMinute' ORDER BY a.cs desc LIMIT 10")
+        [z.setdefault("sc", str(datetime.timedelta(seconds=z["cs"] / 20)).replace(" days,", 'd').split(".")[0].replace(':', 'h ', 1).replace(':', 'm ', 1) + "s") for z in zxsc]
+
+        zskkc = sqlread("SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.diamond_ore' ORDER BY a.cs desc LIMIT 10")
+
+        return self.render(os.path.join(PAGES_DIR, 'index\\main.html').replace('\\', '/'),
+                           zxsc=zxsc, zskkc=zskkc
+                           )
 
 
 class PcJsHandler(RequestHandler):
@@ -38,18 +46,14 @@ class loadUserListHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
         page = int(self.get_argument('page'))
         rows = int(self.get_argument('rows'))
-        ssxm = self.get_argument("ssxm", '')
-        ssuuid = self.get_argument("ssuuid", '')
+        value = self.get_argument("value", '')
         sqlwhere = ""
 
-        sql = "select * from t_user"
-        tsql = "select count(*) as num from t_user"
+        sql = "select * from t_user where 1=1"
+        tsql = "select count(*) as num from t_user where 1=1"
 
-        if ssxm != "":
-            sqlwhere += " and uname like '%" + ssxm + "%'"
-
-        if ssuuid != "":
-            sqlwhere += " and uuid like '%" + ssuuid + "%'"
+        if value != "":
+            sqlwhere += " and (uname like '%" + value + "%' or nameinfo like '%" + value + "%' or uuid like '%" + value + "%')"
 
         total = sqlreadone(tsql + sqlwhere)["num"]
         sql += sqlwhere + " order by updatetime desc limit %s, %s" % ((page - 1) * rows, rows)
