@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="#">竹萌</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
@@ -56,80 +56,117 @@
     </div>
 </nav>
 
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
-    <!--<div class="container">-->
 
-    <!--<p>This is a template for a simple marketing or informational website. It includes a large callout called a-->
-    <!--jumbotron and three supporting pieces of content. Use it as a starting point to create something more-->
-    <!--unique.</p>-->
-    <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>-->
-    <!--</div>-->
-
-
-    <div class="container">
-        <h2>记录排行</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="rank">
-                    <h4>在线时长</h4>
-                    <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                        {% for i in zxsc %}
-                        <li>
-                            <div style="display: none">{{ i["id"] }}</div>
-                            <div style="float: left;">{{ i["uname"] }}</div>
-                            <div style="float: right;">{{ i["sc"] }}</div>
-                        </li>
-                        {% end %}
-                    </ol>
-                    <p>&nbsp;</p>
+    <div class="container" id="myTabs">
+        <ul class="nav nav-tabs" role="tablist" style="margin-top: 10px">
+            <li role="presentation" class="active">
+                <a href="#record" aria-controls="record" role="tab" data-toggle="tab">
+                    <h4>记录排行</h4>
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#friend" aria-controls="friend" role="tab" data-toggle="tab">
+                    <h4>萌友们</h4>
+                </a>
+            </li>
+            <li role="presentation">
+                <a href="#menoylog" aria-controls="menoylog" role="tab" data-toggle="tab">
+                    <h4>金钱记录</h4>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="record">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>在线时长</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in zxsc %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["sc"] }}</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>钻石矿开采</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in zskkc %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"] }}次</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="rank">
-                    <h4>钻石矿开采</h4>
-                    <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                        {% for i in zskkc %}
-                        <li>
-                            <div style="display: none">{{ i["id"] }}</div>
-                            <div style="float: left;">{{ i["uname"] }}</div>
-                            <div style="float: right;">{{ i["cs"] }}次</div>
-                        </li>
-                        {% end %}
-                    </ol>
-                    <p>&nbsp;</p>
+            <div role="tabpanel" class="tab-pane" id="friend">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th>初次登陆时间</th>
+                            <th>最后离线时间</th>
+                            <th>数据更新日期</th>
+                        </tr>
+                        </thead>
+                        <tbody id="userlist">
+                        <tr onclick="lookinfo('@id')" style="cursor: pointer;">
+                            <td>@@rowsnumber@@</td>
+                            <td>@uname</td>
+                            <td>@firstplayed</td>
+                            <td>@lastplayed</td>
+                            <td>@updatetime</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
+                </nav>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="menoylog">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th onclick="px('money', this)" style="cursor: pointer;">当前存款<span></span></th>
+                            <th onclick="px('monout', this)" style="cursor: pointer;">总支出<span></span></th>
+                            <th onclick="px('monin', this)" style="cursor: pointer;">总收入<span></span></th>
+                        </tr>
+                        </thead>
+                        <tbody id="menoyuserlist">
+                        <tr onclick="lookmenoy('@uuid')" style="cursor: pointer;">
+                            <td>@@rowsnumber@@</td>
+                            <td>@player</td>
+                            <td>@money</td>
+                            <td>@monout</td>
+                            <td>@monin</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <nav aria-label="Page navigation" style="text-align: center;" id="menoypageination">
+                </nav>
             </div>
         </div>
     </div>
 </div>
 <div class="container">
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>序号</th>
-                <th>姓名</th>
-                <th>初次登陆时间</th>
-                <th>最后离线时间</th>
-                <th>数据更新日期</th>
-            </tr>
-            </thead>
-            <tbody id="userlist">
-            <tr onclick="lookinfo('@id')">
-                <td>@@rowsnumber@@</td>
-                <td>@uname</td>
-                <td>@firstplayed</td>
-                <td>@lastplayed</td>
-                <td>@updatetime</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
-    </nav>
-
-    <hr>
 
     <footer>
         <p>健健技术支持</p>

@@ -6,6 +6,8 @@ import tornado.web
 import tornado.gen
 from tornado.concurrent import run_on_executor
 import os
+
+from site_config import setting
 from site_config.setting import portsandlink, PAGES_DIR
 import os
 from importlib import import_module

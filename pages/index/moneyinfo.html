@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>金钱往来</title>
+    <link rel="stylesheet" type="text/css" href="/static/javascript/bootstrap/css/bootstrap.css">
+
+    <script src="/static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="/static/javascript/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/javascript/pageinate.js"></script>
+    <script src="/static/javascript/general.js"></script>
+    <script src="/pages/index/moneyinfo.js"></script>
+</head>
+<body>
+{% raw xsrf_form_html() %}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">竹萌</a>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron">
+    <input type="hidden" id="uuid" value="{{ uuid }}"/>
+    <div class="container">
+        <h3>{{ uname }}</h3>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>流水时间</th>
+                    <th>流水金额</th>
+                    <th>当时金额</th>
+                    <th>所在服务器</th>
+                </tr>
+                </thead>
+                <tbody id="userlist">
+                <tr>
+                    <td>@@rowsnumber@@</td>
+                    <td>@eventtime</td>
+                    <td>@je</td>
+                    <td>@oldevent</td>
+                    <td>@servercode</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
+        </nav>
+    </div>
+</div>
+</body>
+</html>

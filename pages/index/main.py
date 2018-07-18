@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from general.project_general import get_serial, JsonEncoder
+from site_config import setting
 from site_config.dblink import saveData, sqlread, sqlreadone
 import sys
 import time
@@ -44,6 +45,7 @@ class PcJsHandler(RequestHandler):
 
 class loadUserListHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
+
         page = int(self.get_argument('page'))
         rows = int(self.get_argument('rows'))
         value = self.get_argument("value", '')
@@ -161,6 +163,7 @@ class JXHandler(RequestHandler):
                         items.append(item)
                     sys.stdout.write("\r共"+str(total)+"个用户, 当前读取第" + str(nn) + "个用户,用户名"+str(uname)+", 共" + str(len(infos)) + "条属性")
                     sys.stdout.flush()
+
         value = saveData(items)
         if value:
             return self.write(json.dumps({"state": "200", "message": "保存成功！"}, cls=JsonEncoder))
@@ -168,7 +171,58 @@ class JXHandler(RequestHandler):
             return self.write(json.dumps({"state": "300", "message": "保存失败！"}, cls=JsonEncoder))
 
 
+class loadMenoyUserListHandler(RequestHandler):
+    def setget(self, *args, **kwargs):
+        pass
+
+    def setpost(self, *args, **kwargs):
+        page = int(self.get_argument('page'))
+        rows = int(self.get_argument('rows'))
+        value = self.get_argument("value", '')
+        lx = self.get_argument("lx", '')
+        fx = self.get_argument("fx", '')
+        sqlwhere = ""
+        orderbylx = ' order by money desc'
+
+        sql = """select *,player_uuid as uuid,
+                ifnull((select sum(oldevent - newevent) from inventory.eventlog where newevent<oldevent and uuid=a.player_uuid ),0) as monout,
+                ifnull((select sum(newevent - oldevent) from inventory.eventlog where newevent>=oldevent and uuid=a.player_uuid),0) as monin
+                from inventory.eco_accounts a where 1=1"""
+        tsql = "select count(*) as num from inventory.eco_accounts where 1=1"
+
+        if value != "":
+            sqlwhere += " and (player like '%" + value + "%' or player_uuid like '%" + value + "%')"
+
+        if lx != "":
+            orderbylx = ' order by ' + lx + " " + fx
+        total = sqlreadone(tsql + sqlwhere)["num"]
+        sql += sqlwhere + orderbylx + " limit %s, %s" % ((page - 1) * rows, rows)
+        items = sqlread(sql)
+        return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
+
+
+class moneyInfoHandler(RequestHandler):
+    def setget(self, *args, **kwargs):
+        uuid = self.get_argument("uuid")
+        uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)['player']
+        return self.render(os.path.join(PAGES_DIR, 'index\\moneyinfo.html').replace('\\', '/'), uuid=uuid, uname=uname)
+
+    def setpost(self, *args, **kwargs):
+        page = int(self.get_argument('page'))
+        rows = int(self.get_argument('rows'))
+        uuid = self.get_argument("uuid")
+        sqlwhere = ""
+        sql = """select *,newevent - oldevent as je from inventory.eventlog a where uuid='%s'""" % uuid
+        tsql = "select count(*) as num from inventory.eventlog where uuid='%s'" % uuid
+
+        total = sqlreadone(tsql + sqlwhere)["num"]
+        sql += sqlwhere + " order by eventtime desc limit %s, %s" % ((page - 1) * rows, rows)
+        items = sqlread(sql)
+        return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
+
 urls = [
     (r"/main/index/jx", JXHandler),
     (r"/main/index/loaduserlist", loadUserListHandler),
+    (r"/main/index/loadmenoyuserlist", loadMenoyUserListHandler),
+    (r"/main/index/moneyinfo", moneyInfoHandler),
 ]
