@@ -84,7 +84,7 @@ def searchFile(filepath):
     for f in os.listdir(filepath):
         if os.path.isdir(os.path.join(filepath, f).replace('\\', '/')):
             us.extend(searchFile(os.path.join(filepath, f).replace('\\', '/')))
-        if os.path.isfile(os.path.join(filepath, f).replace('\\', '/')) and os.path.splitext(f)[0] != "__init__" and (os.path.splitext(f)[1].lower() == ".py" or os.path.splitext(f)[1].lower() == ".pyc"):
+        if os.path.isfile(os.path.join(filepath, f).replace('\\', '/')) and os.path.splitext(f)[0].find("__init__") < 0 and (os.path.splitext(f)[1].lower() == ".py" or os.path.splitext(f)[1].lower() == ".pyc"):
             filename = os.path.splitext(f)
             lj = filepath.split("..")[1][1:].split("/")
             file = import_module(".".join(lj)+'.'+filename[0])
