@@ -91,3 +91,10 @@ function px(lx, obj) {
     });
     $(obj).find("span").html('&nbsp;' + (pxobj[lx]===""? "▲":"▼"));
 }
+
+
+function test() {
+    $.post("/pages/main/input/test", {_xsrf: getCookie("_xsrf")}, function (datas) {
+        alert(datas.message);
+    },"json")
+}
