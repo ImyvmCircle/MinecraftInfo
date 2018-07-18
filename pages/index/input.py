@@ -124,7 +124,18 @@ class JXHandler(RequestHandler):
 
 class TestHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
-        return self.write({"message": os.path.exists(PLAYERDATA_DIR)})
+        str = self.searchfile()
+        return self.write({"message": str})
+
+    def searchfile(self):
+        str = ''
+        curpath = '/home'
+        L = os.listdir(curpath)
+        for subpath in L:
+            if os.path.isdir(os.path.join(curpath, subpath)):
+                str += 'dir:' + subpath + "\n"
+        return str
+
 
 
 urls = [
