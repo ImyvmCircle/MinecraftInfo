@@ -129,11 +129,13 @@ class TestHandler(RequestHandler):
 
     def searchfile(self):
         str = ''
-        curpath = '/home'
+        curpath = '/home/MC/world'
         L = os.listdir(curpath)
         for subpath in L:
             if os.path.isdir(os.path.join(curpath, subpath)):
                 str += 'dir:' + subpath + "\n"
+            elif os.path.isfile(os.path.join(curpath, subpath)):
+                str += 'file:' + subpath + "\n"
         return str
 
 
