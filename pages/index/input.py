@@ -129,7 +129,7 @@ class TestHandler(RequestHandler):
 
     def searchfile(self):
         str = ''
-        curpath = '/home/MC/world'
+        curpath = PLAYERDATA_DIR
         L = os.listdir(curpath)
         for subpath in L:
             if os.path.isdir(os.path.join(curpath, subpath)):
