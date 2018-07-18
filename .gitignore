@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 /.idea
 /stats
 /advancements
 /playerdata
+=======
+
+/stats/
+/site_config/setting.py
+/advancements/
+/playerdata/
+>>>>>>> remotes/狗不理/master

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from general.project_general import get_serial, JsonEncoder
-from site_config import setting
 from site_config.dblink import saveData, sqlread, sqlreadone
 import sys
 import time
@@ -45,7 +44,6 @@ class PcJsHandler(RequestHandler):
 
 class loadUserListHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
-
         page = int(self.get_argument('page'))
         rows = int(self.get_argument('rows'))
         value = self.get_argument("value", '')
@@ -163,13 +161,11 @@ class JXHandler(RequestHandler):
                         items.append(item)
                     sys.stdout.write("\r共"+str(total)+"个用户, 当前读取第" + str(nn) + "个用户,用户名"+str(uname)+", 共" + str(len(infos)) + "条属性")
                     sys.stdout.flush()
-
         value = saveData(items)
         if value:
             return self.write(json.dumps({"state": "200", "message": "保存成功！"}, cls=JsonEncoder))
         else:
             return self.write(json.dumps({"state": "300", "message": "保存失败！"}, cls=JsonEncoder))
-
 
 class loadMenoyUserListHandler(RequestHandler):
     def setget(self, *args, **kwargs):
