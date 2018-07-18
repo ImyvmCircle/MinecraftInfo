@@ -94,7 +94,7 @@ function px(lx, obj) {
 
 
 function test() {
-    $.post("/pages/main/input/test", {_xsrf: getCookie("_xsrf")}, function (datas) {
+    $.post("/pages/main/input/jx", {_xsrf: getCookie("_xsrf")}, function (datas) {
         alert(datas.message);
     },"json")
 }
