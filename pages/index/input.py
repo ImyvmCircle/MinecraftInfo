@@ -37,9 +37,11 @@ def loaduser(self=None):
             firstLogout = timestr(userobj["lastPlayed"])
             if uuid in users:
                 if str(users[uuid]["lastplayed"]) != firstLogout:
-                    uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)["player"]
-                    if uname == "":
+                    uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
+                    if "player" not in uname:
                         uname = userobj["lastKnownName"]
+                    else:
+                        uname = uname["player"]
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
                             {"name": "uname", "value": uname},
@@ -48,9 +50,12 @@ def loaduser(self=None):
                 else:
                     continue
             else:
-                uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)["player"]
-                if uname == "":
+                uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
+
+                if "player" not in uname:
                     uname = userobj["lastKnownName"]
+                else:
+                    uname = uname["player"]
                 firstLogin = timestr(userobj["firstPlayed"])
                 item = [{"tablename": "t_user", "type": "insert", "name": "id", "value": get_serial()},
                         {"name": "uuid", "value": str(fp.split(".")[0])},
@@ -59,6 +64,7 @@ def loaduser(self=None):
                         {"name": "firstplayed", "value": firstLogin},
                         {"name": "lastplayed", "value": firstLogout},
                         ]
+                activeuser.setdefault(uuid, "")
             items.append(item)
             sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
             sys.stdout.flush()
@@ -105,7 +111,7 @@ def saveuser(activeuser, self=None):
                     items.append(item)
                     criteria = infos[i]["criteria"]
                     for j in criteria:
-                        cc = sqlreadone("select * from t_user_success_criteria where ssid='%s' and tj='%s'" % (ssid, j))
+                        cc = sqlreadone("select * from t_user_success_criteria where pid='%s' and tj='%s'" % (ssid, j))
                         if "id" not in cc:
                             item = [
                                 {"tablename": "t_user_success_criteria", "type": "insert", "name": "id",
