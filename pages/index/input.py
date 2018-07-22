@@ -68,6 +68,8 @@ def loaduser(self=None):
             items.append(item)
             sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
             sys.stdout.flush()
+        if len(items) <=0:
+            return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
         if value:
             saveuser(activeuser, self)
