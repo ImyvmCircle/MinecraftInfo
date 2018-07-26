@@ -207,6 +207,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>石英矿开采数</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in minequart_ore %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"] }}块</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>粘土块开采数</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in mineclay %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"]/100 }}块</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" id="friend">
                 <div class="table-responsive">

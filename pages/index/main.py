@@ -39,8 +39,15 @@ class IndexHandler(RequestHandler):
         pigOneCm = sqlread(
             "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.pigOneCm' ORDER BY a.cs desc LIMIT 10")
 
+        minequartz_ore = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.quartz_ore' ORDER BY a.cs desc LIMIT 10")
+
+        mineclay = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.clay' ORDER BY a.cs desc LIMIT 10")
+
         return self.render(os.path.join(PAGES_DIR, 'index\\main.html').replace('\\', '/'),
-                           zxsc=zxsc, zskkc=zskkc, stkc=stkc, qcfx=qcfx, walk=walk, horseOneCm=horseOneCm, mobKills=mobKills, pigOneCm=pigOneCm
+                           zxsc=zxsc, zskkc=zskkc, stkc=stkc, qcfx=qcfx, walk=walk, horseOneCm=horseOneCm, mobKills=mobKills, pigOneCm=pigOneCm,
+                           minequartz_ore=minequartz_ore, mineclay=mineclay
                            )
 
 
