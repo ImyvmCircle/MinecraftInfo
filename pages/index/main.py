@@ -21,8 +21,26 @@ class IndexHandler(RequestHandler):
 
         zskkc = sqlread("SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.diamond_ore' ORDER BY a.cs desc LIMIT 10")
 
+        stkc = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.stone' ORDER BY a.cs desc LIMIT 10")
+
+        qcfx = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.aviateOneCm' ORDER BY a.cs desc LIMIT 10")
+
+        walk = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.walkOneCm' ORDER BY a.cs desc LIMIT 10")
+
+        horseOneCm = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.horseOneCm' ORDER BY a.cs desc LIMIT 10")
+
+        mobKills = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mobKills' ORDER BY a.cs desc LIMIT 10")
+
+        pigOneCm = sqlread(
+            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.pigOneCm' ORDER BY a.cs desc LIMIT 10")
+
         return self.render(os.path.join(PAGES_DIR, 'index\\main.html').replace('\\', '/'),
-                           zxsc=zxsc, zskkc=zskkc
+                           zxsc=zxsc, zskkc=zskkc, stkc=stkc, qcfx=qcfx, walk=walk, horseOneCm=horseOneCm, mobKills=mobKills, pigOneCm=pigOneCm
                            )
 
 

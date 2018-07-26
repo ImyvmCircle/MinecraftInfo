@@ -103,7 +103,103 @@
                                 <li>
                                     <div style="display: none">{{ i["id"] }}</div>
                                     <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"] }}块</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>鞘翅飞行</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in qcfx %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"]/100 }}米</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>石头开采</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in stkc %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"] }}块</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>行走距离</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in walk %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"]/100 }}米</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>骑马移动距离</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in horseOneCm %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"]/100 }}米</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>生物击杀次数</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in mobKills %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
                                     <div style="float: right;">{{ i["cs"] }}次</div>
+                                </li>
+                                {% end %}
+                            </ol>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="rank">
+                            <h4>骑猪移动距离</h4>
+                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
+                                {% for i in pigOneCm %}
+                                <li>
+                                    <div style="display: none">{{ i["id"] }}</div>
+                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
+                                    <div style="float: right;">{{ i["cs"]/100 }}米</div>
                                 </li>
                                 {% end %}
                             </ol>
