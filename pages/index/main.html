@@ -212,7 +212,7 @@
                         <div class="rank">
                             <h4>石英矿开采数</h4>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in minequart_ore %}
+                                {% for i in minequartz_ore %}
                                 <li>
                                     <div style="display: none">{{ i["id"] }}</div>
                                     <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
@@ -231,7 +231,7 @@
                                 <li>
                                     <div style="display: none">{{ i["id"] }}</div>
                                     <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["cs"]/100 }}块</div>
+                                    <div style="float: right;">{{ i["cs"] }}块</div>
                                 </li>
                                 {% end %}
                             </ol>
