@@ -16,6 +16,10 @@ class JXHandler(RequestHandler):
         datas = loaduser(self)
         return self.write(json.dumps(datas, cls=JsonEncoder))
 
+    def setget(self, *args, **kwargs):
+        datas = loaduser(self)
+        return self.write(json.dumps(datas, cls=JsonEncoder))
+
 
 def loaduser(self=None):
     def timestr(obj):
@@ -45,6 +49,7 @@ def loaduser(self=None):
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
                             {"name": "uname", "value": uname},
+                            {"name": "updatetime", "value": dt},
                             ]
                     activeuser.setdefault(uuid, "")
                 else:
@@ -63,6 +68,7 @@ def loaduser(self=None):
                         {"name": "nameinfo", "value": str([])},
                         {"name": "firstplayed", "value": firstLogin},
                         {"name": "lastplayed", "value": firstLogout},
+                        {"name": "updatetime", "value": dt},
                         ]
                 activeuser.setdefault(uuid, "")
             items.append(item)
