@@ -124,8 +124,8 @@ class moneyInfoHandler(RequestHandler):
         rows = int(self.get_argument('rows'))
         uuid = self.get_argument("uuid")
         sqlwhere = ""
-        sql = """select *,newevent - oldevent as je from inventory.eventlog a where uuid='%s'""" % uuid
-        tsql = "select count(*) as num from inventory.eventlog where uuid='%s'" % uuid
+        sql = """select *,newevent - oldevent as je from inventory.eventlog a where newevent!=oldevent and uuid='%s'""" % uuid
+        tsql = "select count(*) as num from inventory.eventlog where newevent!=oldevent and uuid='%s'" % uuid
 
         total = sqlreadone(tsql + sqlwhere)["num"]
         sql += sqlwhere + " order by eventtime desc limit %s, %s" % ((page - 1) * rows, rows)
