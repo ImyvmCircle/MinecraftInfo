@@ -21,12 +21,12 @@ class RequestHandler(tornado.web.RequestHandler):
             data = {
 
             }
-            return self.render(os.path.join(PAGES_DIR, 'page\\main\\404.html').replace('\\', '/'), data=data)
+            return self.render(os.path.join(PAGES_DIR, 'index\\main.html').replace('\\', '/'), data=data)
         elif status_code == 500:
             data = {
 
             }
-            return self.render(os.path.join(PAGES_DIR, 'page\\main\\logout.html').replace('\\', '/'), data=data)
+            return self.render(os.path.join(PAGES_DIR, 'page\\main.html').replace('\\', '/'), data=data)
         else:
             super(RequestHandler, self).write_error(status_code, **kwargs)
 
@@ -38,7 +38,7 @@ class RequestHandler(tornado.web.RequestHandler):
     def post(self, *args, **kwargs):
         yield self.relsepost()
 
-    @run_on_executor
+    # @run_on_executor
     def relsepost(self, *args, **kwargs):
         self.setpost()
 
@@ -49,7 +49,7 @@ class RequestHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         yield self.relseget()
 
-    @run_on_executor
+    # @run_on_executor
     def relseget(self, *args, **kwargs):
         self.setget()
 
