@@ -28,6 +28,8 @@ def loaduser(self=None):
         return timeobj
 
     items = []
+    dailyname = []
+    newname = []
     activeuser = {}
     if os.path.isdir(PLAYERDATA_DIR):
         dt = datetime.datetime.now()
@@ -44,6 +46,7 @@ def loaduser(self=None):
                     uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
                     if "player" not in uname:
                         uname = userobj["lastKnownName"]
+                        newname.append(uname)
                     else:
                         uname = uname["player"]
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
@@ -52,6 +55,7 @@ def loaduser(self=None):
                             {"name": "updatetime", "value": dt},
                             ]
                     activeuser.setdefault(uuid, "")
+                    dailyname.append(uname)
                 else:
                     continue
             else:
@@ -77,8 +81,15 @@ def loaduser(self=None):
         if len(items) <=0:
             return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
+    
         if value:
             saveuser(activeuser, self)
+            webhook = "https://discordapp.com/api/webhooks/538778171991130122/Rpud1WNgU4Ygteg78TRAHiHJB_D1B6RcZgDh9Lzfippv8c0JW1ZBFvHVebSTwqFeFv5w"
+            if len(newname)==0:
+                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
+            else:
+                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 其中新玩家为："+", ".join(str(x) for x in newname)
+            send(message, webhook)
         else:
             if self is not None:
                 return {"state": "300", "message": "保存失败！"}
@@ -179,6 +190,16 @@ def saveuser(activeuser, self=None):
 def runReadData():
     loaduser()
 
+def send(message, webhook):
+    conn = http.client.HTTPSConnection("discordapp.com")
+    payload = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n" + message + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+    headers = {
+        'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        'cache-control': "no-cache",
+        }
+    conn.request("POST", webhook, payload, headers)
+    res = conn.getresponse()
+    data = res.read()
 
 class TestHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
