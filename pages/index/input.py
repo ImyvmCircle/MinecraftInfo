@@ -39,7 +39,6 @@ def loaduser(self=None):
         return timeobj
     
     webhook = "https://discordapp.com/api/webhooks/538778171991130122/Rpud1WNgU4Ygteg78TRAHiHJB_D1B6RcZgDh9Lzfippv8c0JW1ZBFvHVebSTwqFeFv5w"
-    send("123",webhook)
     items = []
     dailyname = []
     newname = []
