@@ -26,7 +26,8 @@ def loaduser(self=None):
         objfloat = float(str(obj)[:10] + '.' + str(obj)[10:-1])
         timeobj = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(objfloat))
         return timeobj
-
+    
+    webhook = "https://discordapp.com/api/webhooks/538778171991130122/Rpud1WNgU4Ygteg78TRAHiHJB_D1B6RcZgDh9Lzfippv8c0JW1ZBFvHVebSTwqFeFv5w"
     items = []
     dailyname = []
     newname = []
@@ -79,12 +80,12 @@ def loaduser(self=None):
             sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
             sys.stdout.flush()
         if len(items) <=0:
+            message = "昨日暂无统计信息！"
+            send(message, webhook)
             return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
-    
         if value:
             saveuser(activeuser, self)
-            webhook = "https://discordapp.com/api/webhooks/538778171991130122/Rpud1WNgU4Ygteg78TRAHiHJB_D1B6RcZgDh9Lzfippv8c0JW1ZBFvHVebSTwqFeFv5w"
             if len(newname)==0:
                 message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
             else:
