@@ -21,6 +21,16 @@ class JXHandler(RequestHandler):
         datas = loaduser(self)
         return self.write(json.dumps(datas, cls=JsonEncoder))
 
+def send(message, webhook):
+    conn = http.client.HTTPSConnection("discordapp.com")
+    payload = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n" + message + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
+    headers = {
+        'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+        'cache-control': "no-cache",
+        }
+    conn.request("POST", webhook, payload, headers)
+    res = conn.getresponse()
+    data = res.read()
 
 def loaduser(self=None):
     def timestr(obj):
@@ -29,6 +39,7 @@ def loaduser(self=None):
         return timeobj
     
     webhook = "https://discordapp.com/api/webhooks/538778171991130122/Rpud1WNgU4Ygteg78TRAHiHJB_D1B6RcZgDh9Lzfippv8c0JW1ZBFvHVebSTwqFeFv5w"
+    send("123",webhook)
     items = []
     dailyname = []
     newname = []
@@ -191,17 +202,6 @@ def saveuser(activeuser, self=None):
 
 def runReadData():
     loaduser()
-
-def send(message, webhook):
-    conn = http.client.HTTPSConnection("discordapp.com")
-    payload = "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"content\"\r\n\r\n" + message + "\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"
-    headers = {
-        'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
-        'cache-control': "no-cache",
-        }
-    conn.request("POST", webhook, payload, headers)
-    res = conn.getresponse()
-    data = res.read()
 
 class TestHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
