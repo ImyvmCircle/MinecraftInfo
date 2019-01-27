@@ -9,6 +9,7 @@ import os
 from site_config.BaseHandler import RequestHandler
 from site_config.setting import STATS_DIR, PLAYERDATA_DIR, ADV_DIR
 from nbtlib import nbt
+import http.client
 
 
 class JXHandler(RequestHandler):
