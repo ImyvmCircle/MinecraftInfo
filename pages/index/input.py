@@ -14,8 +14,9 @@ import http.client
 
 class JXHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
-        datas = loaduser(self)
-        return self.write(json.dumps(datas, cls=JsonEncoder))
+        pass
+        # datas = loaduser(self)
+        # return self.write(json.dumps(datas, cls=JsonEncoder))
 
     def setget(self, *args, **kwargs):
         datas = loaduser(self)
