@@ -58,7 +58,6 @@ def loaduser(self=None):
                     uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
                     if "player" not in uname:
                         uname = userobj["lastKnownName"]
-                        newname.append(uname)
                     else:
                         uname = uname["player"]
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
@@ -86,6 +85,7 @@ def loaduser(self=None):
                         {"name": "lastplayed", "value": firstLogout},
                         {"name": "updatetime", "value": dt},
                         ]
+                newname.append(uname)
                 activeuser.setdefault(uuid, "")
             items.append(item)
             sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
@@ -95,7 +95,9 @@ def loaduser(self=None):
             send(message, webhook)
             return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
+        
         if value:
+            print('保存是否成功345345')
             saveuser(activeuser, self)
             if len(newname)==0:
                 message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
