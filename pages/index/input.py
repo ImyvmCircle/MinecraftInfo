@@ -92,8 +92,6 @@ def loaduser(self=None):
             sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
             sys.stdout.flush()
         if len(items) <=0:
-            message = "昨日暂无统计信息！"
-            send(message, webhook)
             return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
         
