@@ -57,7 +57,7 @@ def loaduser(self=None):
             if uuid in users:
                 if str(users[uuid]["lastplayed"]) != firstLogout:
                     uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
-                    if "player" not in uname:
+                    if "player" not in uname: 
                         uname = userobj["lastKnownName"]
                     else:
                         uname = uname["player"]
@@ -98,12 +98,11 @@ def loaduser(self=None):
         value = saveData(items)
         
         if value:
-            print('保存是否成功345345')
             saveuser(activeuser, self)
             if len(newname)==0:
-                message = "昨日活跃玩家: ".decode('latin-1')+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
+                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
             else:
-                message = "昨日活跃玩家: ".decode('latin-1')+", ".join(str(x) for x in dailyname)+", 其中新玩家为："+", ".join(str(x) for x in newname)
+                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 其中新玩家为："+", ".join(str(x) for x in newname)
             send(message, webhook)
         else:
             if self is not None:
