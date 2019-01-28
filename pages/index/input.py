@@ -28,7 +28,7 @@ def send(message, webhook):
         'content-type': "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
         'cache-control': "no-cache",
         }
-    conn.request("POST", webhook, payload, headers)
+    conn.request("POST", webhook, payload.encode('utf-8'), headers)
     res = conn.getresponse()
     data = res.read()
 
@@ -100,9 +100,9 @@ def loaduser(self=None):
             print('保存是否成功345345')
             saveuser(activeuser, self)
             if len(newname)==0:
-                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
+                message = "昨日活跃玩家: ".decode('latin-1')+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
             else:
-                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 其中新玩家为："+", ".join(str(x) for x in newname)
+                message = "昨日活跃玩家: ".decode('latin-1')+", ".join(str(x) for x in dailyname)+", 其中新玩家为："+", ".join(str(x) for x in newname)
             send(message, webhook)
         else:
             if self is not None:
