@@ -43,6 +43,8 @@ def loaduser(self=None):
     items = []
     dailyname = []
     newname = []
+    oldplayers = []
+    birthplayers = []
     activeuser = {}
     if os.path.isdir(PLAYERDATA_DIR):
         dt = datetime.datetime.now()
@@ -54,13 +56,22 @@ def loaduser(self=None):
             file = nbt.load(os.path.join(PLAYERDATA_DIR, fp))
             userobj = file.root["bukkit"]
             firstLogout = timestr(userobj["lastPlayed"])
+            firstLogin = timestr(userobj["firstLogin"])
+            firstLoginti = time.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
+            firstLogint = datetime.datetime(*firstLoginti[:6])
+            
+            uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
+            if "player" not in uname: 
+                uname = userobj["lastKnownName"]
+            else:
+                uname = uname["player"]
+
             if uuid in users:
+                if dt.month == firstLogint.month and dt.day == firstLogint.day:
+                    birthplayers.append(uname)
                 if str(users[uuid]["lastplayed"]) != firstLogout:
-                    uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
-                    if "player" not in uname: 
-                        uname = userobj["lastKnownName"]
-                    else:
-                        uname = uname["player"]
+                    if (dt-firstLogout).day>90:
+                        oldplayers.append(uname)
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
                             {"name": "uname", "value": uname},
@@ -71,12 +82,6 @@ def loaduser(self=None):
                 else:
                     continue
             else:
-                uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
-
-                if "player" not in uname:
-                    uname = userobj["lastKnownName"]
-                else:
-                    uname = uname["player"]
                 firstLogin = timestr(userobj["firstPlayed"])
                 item = [{"tablename": "t_user", "type": "insert", "name": "id", "value": get_serial()},
                         {"name": "uuid", "value": str(fp.split(".")[0])},
@@ -97,10 +102,10 @@ def loaduser(self=None):
         
         if value:
             saveuser(activeuser, self)
-            if len(newname)==0:
-                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 暂无新玩家加入。"
+            if len(birthplayers)<=0:
+                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天**\n Happy Birthday: " + "暂无" + "\n **方块统计** \n 待续......"
             else:
-                message = "昨日活跃玩家: "+", ".join(str(x) for x in dailyname)+", 其中新玩家为："+", ".join(str(x) for x in newname)
+                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天**\n Happy Birthday: " + ", ".join(str(x) for x in birthplayers) + "\n **方块统计** \n 待续......"
             send(message, webhook)
         else:
             if self is not None:
