@@ -56,13 +56,12 @@ def loaduser(self=None):
             file = nbt.load(os.path.join(PLAYERDATA_DIR, fp))
             userobj = file.root["bukkit"]
             firstLogout = timestr(userobj["lastPlayed"])
-            print(firstLogout)
+            firstLogouti = time.strptime(firstLogout, "%Y-%m-%d %H:%M:%S")
+            firstLogoutt = datetime.datetime(*firstLogouti[:6])
 
             firstLogin = str(users[uuid]["firstplayed"])
             firstLoginti = time.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
             firstLogint = datetime.datetime(*firstLoginti[:6])
-            print(firstLogin)
-            print(firstLoginti)
             
             uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
             if "player" not in uname: 
@@ -75,7 +74,7 @@ def loaduser(self=None):
                     birthplayers.append(uname)
 
                 if str(users[uuid]["lastplayed"]) != firstLogout:
-                    if (dt-firstLogout).day>90:
+                    if (dt-firstLogoutt).day>90:
                         oldplayers.append(uname)
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
