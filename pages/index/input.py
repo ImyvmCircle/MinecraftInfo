@@ -59,7 +59,7 @@ def loaduser(self=None):
             firstLogouti = time.strptime(firstLogout, "%Y-%m-%d %H:%M:%S")
             firstLogoutt = datetime.datetime(*firstLogouti[:6])
 
-            firstLogin = str(users[uuid]["firstplayed"])
+            firstLogin = timestr(userobj["firstPlayed"])
             firstLoginti = time.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
             firstLogint = datetime.datetime(*firstLoginti[:6])
 
