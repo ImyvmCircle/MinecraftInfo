@@ -62,14 +62,13 @@ def loaduser(self=None):
             firstLogin = str(users[uuid]["firstplayed"])
             firstLoginti = time.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
             firstLogint = datetime.datetime(*firstLoginti[:6])
-            
-            uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
-            if "player" not in uname: 
-                uname = userobj["lastKnownName"]
-            else:
-                uname = uname["player"]
 
             if uuid in users:
+                uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
+                if "player" not in uname: 
+                    uname = userobj["lastKnownName"]
+                else:
+                    uname = uname["player"]
                 if dt.month == firstLogint.month and dt.day == firstLogint.day:
                     birthplayers.append(uname)
 
