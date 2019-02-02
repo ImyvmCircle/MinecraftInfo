@@ -74,7 +74,7 @@ def loaduser(self=None):
                     birthplayers.append(uname)
 
                 if str(users[uuid]["lastplayed"]) != firstLogout:
-                    if (dt-firstLogoutt).day>90:
+                    if (dt-firstLogoutt).days>90:
                         oldplayers.append(uname)
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
