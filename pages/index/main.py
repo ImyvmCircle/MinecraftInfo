@@ -77,9 +77,10 @@ class loadUserListHandler(RequestHandler):
 
         if value != "":
             params.extend(["%" + value + "%","%" + value + "%","%" + value + "%"])
-            sqlwhere += " and (uname like '%s' or nameinfo like '%s' or uuid like '%s')"
+            sqlwhere += " and (uname like %s or nameinfo like %s or uuid like %s)"
 
         total = sqldefensereadone(tsql + sqlwhere, params)["num"]
+        
         sql += sqlwhere + " order by updatetime desc limit %s, %s"
         params.extend([(page - 1) * rows, rows])
         items = sqldefenseread(sql, params)
@@ -109,12 +110,13 @@ class loadMenoyUserListHandler(RequestHandler):
 
         if value != "":
             params.extend(["%" + value + "%", "%" + value + "%"])
-            sqlwhere += " and (player like '%s' or player_uuid like '%s')"
+            sqlwhere += " and (player like %s or player_uuid like %s)"
 
         if lx != "":
             orderbylx = ' order by %s %s'
             params.extend([lx, fx])
         total = sqldefensereadone(tsql + sqlwhere, params)["num"]
+        print(total)
         sql += sqlwhere + orderbylx + " limit %s, %s"
         params.extend([(page - 1) * rows, rows])
         items = sqldefenseread(sql, params)
