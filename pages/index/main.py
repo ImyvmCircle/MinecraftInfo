@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from general.project_general import JsonEncoder
-from site_config.dblink import sqlread, sqlreadone
+from site_config.dblink import sqlread, sqlreadone, sqldefenseread, sqldefensereadone
 import json
 import datetime
 import os
@@ -70,16 +70,19 @@ class loadUserListHandler(RequestHandler):
         rows = int(self.get_argument('rows'))
         value = self.get_argument("value", '')
         sqlwhere = ""
+        params = []
 
         sql = "select * from t_user where 1=1"
         tsql = "select count(*) as num from t_user where 1=1"
 
         if value != "":
-            sqlwhere += " and (uname like '%" + value + "%' or nameinfo like '%" + value + "%' or uuid like '%" + value + "%')"
+            params.extend(["%" + value + "%","%" + value + "%","%" + value + "%"])
+            sqlwhere += " and (uname like '%s' or nameinfo like '%s' or uuid like '%s')"
 
-        total = sqlreadone(tsql + sqlwhere)["num"]
-        sql += sqlwhere + " order by updatetime desc limit %s, %s" % ((page - 1) * rows, rows)
-        items = sqlread(sql)
+        total = sqldefensereadone(tsql + sqlwhere, params)["num"]
+        sql += sqlwhere + " order by updatetime desc limit %s, %s"
+        params.extend([(page - 1) * rows, rows])
+        items = sqldefenseread(sql, params)
         return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
 
@@ -94,6 +97,8 @@ class loadMenoyUserListHandler(RequestHandler):
         lx = self.get_argument("lx", '')
         fx = self.get_argument("fx", '')
         sqlwhere = ""
+        params = []
+
         orderbylx = ' order by money desc'
 
         sql = """select *,player_uuid as uuid,
@@ -103,13 +108,16 @@ class loadMenoyUserListHandler(RequestHandler):
         tsql = "select count(*) as num from inventory.eco_accounts where 1=1"
 
         if value != "":
-            sqlwhere += " and (player like '%" + value + "%' or player_uuid like '%" + value + "%')"
+            params.extend(["%" + value + "%", "%" + value + "%"])
+            sqlwhere += " and (player like '%s' or player_uuid like '%s')"
 
         if lx != "":
-            orderbylx = ' order by ' + lx + " " + fx
-        total = sqlreadone(tsql + sqlwhere)["num"]
-        sql += sqlwhere + orderbylx + " limit %s, %s" % ((page - 1) * rows, rows)
-        items = sqlread(sql)
+            orderbylx = ' order by %s %s'
+            params.extend([lx, fx])
+        total = sqldefensereadone(tsql + sqlwhere, params)["num"]
+        sql += sqlwhere + orderbylx + " limit %s, %s"
+        params.extend([(page - 1) * rows, rows])
+        items = sqldefenseread(sql, params)
         return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
 
