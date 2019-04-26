@@ -116,7 +116,6 @@ class loadMenoyUserListHandler(RequestHandler):
             orderbylx = ' order by %s %s'
             params.extend([lx, fx])
         total = sqldefensereadone(tsql + sqlwhere, params)["num"]
-        print(total)
         sql += sqlwhere + orderbylx + " limit %s, %s"
         params.extend([(page - 1) * rows, rows])
         items = sqldefenseread(sql, params)

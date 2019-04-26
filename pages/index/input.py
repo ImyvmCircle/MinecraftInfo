@@ -70,10 +70,11 @@ def loaduser(self=None):
                 else:
                     uname = uname["player"]
                 if dt.month == firstLogint.month and dt.day == firstLogint.day:
-                    birthplayers.append(uname)
+                    if (dt-firstLogoutt).days<=90:
+                        birthplayers.append(uname)
 
                 if str(users[uuid]["lastplayed"]) != firstLogout:
-                    if (dt-firstLogoutt).days>90:
+                    if (dt-firstLogoutt).days>=90:
                         oldplayers.append(uname)
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
@@ -106,9 +107,9 @@ def loaduser(self=None):
         if value:
             saveuser(activeuser, self)
             if len(birthplayers)<=0:
-                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天**\n Happy Birthday: " + "暂无" + "\n **方块统计** \n 待续......"
+                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天(90天内有登录)**\n Happy Birthday: " + "暂无" + "\n **方块统计** \n 待续......"
             else:
-                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天**\n Happy Birthday: " + ", ".join(str(x) for x in birthplayers) + "\n **方块统计** \n 待续......"
+                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天(90天内有登录)**\n Happy Birthday: " + ", ".join(str(x) for x in birthplayers) + "\n **方块统计** \n 待续......"
             send(message, webhook)
         else:
             if self is not None:
