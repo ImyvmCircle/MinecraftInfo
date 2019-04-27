@@ -57,11 +57,11 @@ def loaduser(self=None):
             userobj = file.root["bukkit"]
             firstLogout = timestr(userobj["lastPlayed"])
             firstLogouti = time.strptime(firstLogout, "%Y-%m-%d %H:%M:%S")
-            firstLogoutt = datetime.datetime(*firstLogouti[:6])
+            # firstLogoutt = datetime.datetime(*firstLogouti[:6])
 
             firstLogin = timestr(userobj["firstPlayed"])
             firstLoginti = time.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
-            firstLogint = datetime.datetime(*firstLoginti[:6])
+            # firstLogint = datetime.datetime(*firstLoginti[:6])
 
             if uuid in users:
                 uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
@@ -69,12 +69,12 @@ def loaduser(self=None):
                     uname = userobj["lastKnownName"]
                 else:
                     uname = uname["player"]
-                if dt.month == firstLogint.month and dt.day == firstLogint.day:
-                    if (dt-firstLogoutt).days<=90:
+                if dt.month == firstLoginti.month and dt.day == firstLoginti.day:
+                    if abs((dt-firstLogouti).days)<=90:
                         birthplayers.append(uname)
 
                 if str(users[uuid]["lastplayed"]) != firstLogout:
-                    if (dt-firstLogoutt).days>=90:
+                    if abs((dt-firstLogouti).days)>=90:
                         oldplayers.append(uname)
                     item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
                             {"name": "lastplayed", "value": firstLogout},
