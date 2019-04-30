@@ -141,8 +141,22 @@ class moneyInfoHandler(RequestHandler):
         items = sqlread(sql)
         return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
+
+class userInfoHandler(RequestHandler):
+    def setget(self, *args, **kwargs):
+        userid = self.get_argument("userid")
+        return self.render(os.path.join(PAGES_DIR, 'index\\userinfo.html').replace('\\', '/'), userid=userid)
+
+    def setpost(self, *args, **kwargs):
+        userid = self.get_argument("userid")
+        user = sqldefensereadone("select * from t_user where id=%s", [userid])
+        action = sqldefenseread("select * from t_user_action where pid=%s", [userid])
+        return self.write(json.dumps({"user":user, "action": action}, cls=JsonEncoder))
+
+
 urls = [
     (r"/main/index/loaduserlist", loadUserListHandler),
     (r"/main/index/loadmenoyuserlist", loadMenoyUserListHandler),
     (r"/main/index/moneyinfo", moneyInfoHandler),
+    (r"/main/index/userinfo", userInfoHandler),
 ]

@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>我的世界信息库</title>
+    <link rel="stylesheet" type="text/css" href="/static/javascript/bootstrap/css/bootstrap.css">
+
+    <script src="/static/javascript/jquery-3.2.1.min.js"></script>
+    <script src="/static/javascript/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/javascript/pageinate.js"></script>
+    <script src="/static/javascript/general.js"></script>
+    <script src="/pages/index/userinfo.js"></script>
 </head>
 <body>
+<input type="hidden" id='userid' value="{{userid}}">
+<div id='userinfo'></div>
+<div id='actioninfo'></div>
+
+<div>
+<ul class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link active" href="#">通用</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">物品</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">生物</a>
+    </li>
+</ul>
+</div>
 
 </body>
 </html>

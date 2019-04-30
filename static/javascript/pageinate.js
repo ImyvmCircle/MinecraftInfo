@@ -127,32 +127,32 @@ function PagerView(id,targetid) {
         start = Math.max(1, self.index - parseInt(self.maxButtons / 2));
         end = Math.min(self.pageCount, start + self.maxButtons - 1);
         start = Math.max(1, end - self.maxButtons + 1);
-        var str = '<ul class="pagination">';
+        var str = '<div class="container" id="pages"><div class="row" style="margin-left: 5%; margin-right: 5%;"><div class="col-md-6"><ul class="pagination justify-content-center" style="margin-top: 1rem">';
         if (self.pageCount > 1) {
             if (self.index != 1) {
-                str += '<li><a href="javascript://' + (self.index - 1) + '" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+                str += '<li class="page-item"><a class="page-link" href="javascript://' + (self.index - 1) + '">Previous</a></li>';
             } else {
-                str += '<li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>';
+                str += '<li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">Previous</span></a></li>';
             }
         }
         for (var i = start; i <= end; i++) {
             if (i == this.index) {
-                str += '<li class="active"><a href="#">'+i+'</a></li>';
+                str += '<li class="page-item active"><a class="page-link" href="#">'+i+'<span class="sr-only">(current)</span></a></li>';
             } else if ((i <= this.index+2 || i >= this.index-2) ){
-                str += '<li><a href="javascript://' + i + '">'+i+'</a></li>';
+                str += '<li class="page-item"><a class="page-link" href="javascript://' + i + '">'+i+'</a></li>';
             }
         }
         if (self.pageCount > 1) {
             if (self.index != self.pageCount) {
-                str += '<li><a href="javascript://' + (self.index + 1) + '" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+                str += '<li class="page-item"><a class="page-link" href="javascript://' + (self.index + 1) + '">Next</a></li>';
             } else {
-                str += '<li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>';
+                str += '<li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">Next</span></a></li>';
             }
         }
-        str +='<li class="form-inline" style="padding-left: 20px;"><div class="form-group"><label for="btnGo">跳转到</label>' +
-            '<input type="text" class="form-control" id="btnGo" style="width: 45px;margin: 0 5px;"><button type="button" class="btn btn-default btn-sm" style="margin: 2px 2px">GO</button>' +
-            '<label>共 '+self.pageCount+' 页, ' + self.itemCount + '条记录</label></div></li>';
-        str += '</ul>';
+        str +='</ul></div><div class="col-md-6"><div class="form-inline" justify-content-center style="padding-top: 15px;"><div class="form-group"><label for="btnGo">跳转到&nbsp</label>' +
+            '<input type="text" class="form-control" id="btnGo" style="width: 50px; border-radius:0; display: inline-block;">&nbsp<button type="button" class="btn btn-light">GO</button>' +
+            '<label>&nbsp共 '+self.pageCount+' 页, ' + self.itemCount + '条记录</label></div></div>';
+        str += '</div></div></div>';
         self.container.innerHTML = str;
         var li_list = self.container.getElementsByTagName('li');
         for (var i = 0; i < li_list.length; i++) {

@@ -72,7 +72,8 @@ function SearchuUser(value) {
 }
 
 function lookinfo(objid) {
-    alert(objid)
+    // alert(objid)
+    window.location.href='/pages/main/index/userinfo?userid='+objid;
 }
 
 

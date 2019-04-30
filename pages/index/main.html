@@ -30,49 +30,52 @@
         .rank ol {
             padding-right: 30px;
         }
+        .nav-item>.active{
+            background-color: green !important;
+            color: #fff !important;
+        }
+        .nav-link{
+            color: green !important;
+        }
+        .page-item.active .page-link {
+            background-color: green !important;
+            border-color: green !important;
+        }
+        .page-link{
+            color: black !important;
+        }
     </style>
 </head>
 <body>
 {% raw xsrf_form_html() %}
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">竹萌</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <form class="navbar-form navbar-right" onsubmit="return false;">
-                <input id="input-none" type="text" placeholder="" class="form-control"
-                       onchange="SearchuUser(this.value)">>
-            </form>
-        </div><!--/.navbar-collapse -->
+        <a class="navbar-brand" href="#" style="color: green"><h5>竹萌</h5></a>
+        <form class="form-inline" onsubmit="return false;">
+            <input id="input-none" type="text" placeholder="" class="form-control"
+                   onchange="SearchuUser(this.value)">
+        </form>
     </div>
 </nav>
 
-<div class="jumbotron">
+<div class="jumbotron" style="padding-top:2%;">
 
-    <div class="container" id="myTabs">
-        <ul class="nav nav-tabs" role="tablist" style="margin-top: 10px">
-            <li role="presentation" class="active">
-                <a href="#record" aria-controls="record" role="tab" data-toggle="tab">
-                    <h4>记录排行</h4>
+    <div class="container" id="myTabs" >
+        <ul class="nav nav-pills mb-3" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#record" aria-controls="record" role="tab" data-toggle="pill" aria-selected="true">
+                    记录排行
                 </a>
             </li>
-            <li role="presentation">
-                <a href="#friend" aria-controls="friend" role="tab" data-toggle="tab">
-                    <h4>萌友们</h4>
+            <li class="nav-item">
+                <a class="nav-link" href="#friend" aria-controls="friend" role="tab" data-toggle="pill" aria-selected="false">
+                    萌友们
                 </a>
             </li>
-            <li role="presentation">
-                <a href="#menoylog" aria-controls="menoylog" role="tab" data-toggle="tab">
-                    <h4>金钱记录</h4>
+            <li class="nav-item">
+                <a class="nav-link" href="#menoylog" aria-controls="menoylog" role="tab" data-toggle="pill" aria-selected="false">
+                    金钱记录
                 </a>
             </li>
         </ul>
@@ -81,7 +84,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>在线时长</h4>
+                            <h5>在线时长</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in zxsc %}
                                 <li>
@@ -96,7 +99,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>钻石矿开采</h4>
+                            <h5>钻石矿开采</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in zskkc %}
                                 <li>
@@ -113,7 +116,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>鞘翅飞行</h4>
+                            <h5>鞘翅飞行</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in qcfx %}
                                 <li>
@@ -128,7 +131,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>石头开采</h4>
+                            <h5>石头开采</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in stkc %}
                                 <li>
@@ -145,7 +148,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>行走距离</h4>
+                            <h5>行走距离</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in walk %}
                                 <li>
@@ -160,7 +163,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>骑马移动距离</h4>
+                            <h5>骑马移动距离</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in horseOneCm %}
                                 <li>
@@ -177,7 +180,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>生物击杀次数</h4>
+                            <h5>生物击杀次数</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in mobKills %}
                                 <li>
@@ -192,7 +195,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>骑猪移动距离</h4>
+                            <h5>骑猪移动距离</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in pigOneCm %}
                                 <li>
@@ -209,7 +212,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>石英矿开采数</h4>
+                            <h5>石英矿开采数</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in minequartz_ore %}
                                 <li>
@@ -224,7 +227,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="rank">
-                            <h4>粘土块开采数</h4>
+                            <h5>粘土块开采数</h5>
                             <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
                                 {% for i in mineclay %}
                                 <li>
@@ -262,7 +265,7 @@
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
+                <nav aria-label="Page navigation" id="pageination">
                 </nav>
             </div>
             <div role="tabpanel" class="tab-pane" id="menoylog">
@@ -288,7 +291,7 @@
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation" style="text-align: center;" id="menoypageination">
+                <nav aria-label="Page navigation" id="menoypageination">
                 </nav>
 
             </div>
