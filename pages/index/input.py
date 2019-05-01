@@ -200,10 +200,10 @@ def saveuser(activeuser, self=None):
                 ss = sqlreadone("select * from t_user_stats where id='%s'" % (userid))
                 if "id" not in ss:
                     item = [{"tablename": "t_user_stats", "type": "insert", "name": "id",
-                     "value": userid},{"name": "stats", "value": "'"+infos+"'"},]
+                     "value": userid},{"name": "stats", "value": json.dumps(infos)},]
                 else:
                     item = [{"tablename": "t_user_stats", "type": "update", "itemid": "id",
-                     "value": ss["id"]},{"name": "stats", "value": "'"+infos+"'"},]
+                     "value": ss["id"]},{"name": "stats", "value": json.dumps(infos)},]
                 items.append(item)
                 sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname)
                                  + ", 共" + str(len(infos)) + "条属性")
