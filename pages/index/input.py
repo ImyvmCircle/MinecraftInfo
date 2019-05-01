@@ -174,8 +174,8 @@ def saveuser(activeuser, self=None):
         total = len(os.listdir(STATS_DIR))
         for nn, fp in enumerate(os.listdir(STATS_DIR)):
             uuid = str(fp.split(".")[0])
-            if uuid not in activeuser:
-                continue
+            # if uuid not in activeuser:
+            #     continue
             if uuid not in users:
                 print('\n' + uuid + "属性无用户资料")
                 continue
