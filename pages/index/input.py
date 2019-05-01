@@ -103,6 +103,7 @@ def loaduser(self=None):
         if len(items) <=0:
             return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
+        saveuser(activeuser, self)
         
         if value:
             saveuser(activeuser, self)
