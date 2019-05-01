@@ -51,6 +51,7 @@ def loaduser(self=None):
         users = {}
         [users.setdefault(d["uuid"], d) for d in sqlread("select * from t_user")]
         total = len(os.listdir(PLAYERDATA_DIR))
+        saveuser(activeuser, self)
         for nn, fp in enumerate(os.listdir(PLAYERDATA_DIR)):
             uuid = str(fp.split(".")[0])
             file = nbt.load(os.path.join(PLAYERDATA_DIR, fp))
@@ -103,7 +104,6 @@ def loaduser(self=None):
         if len(items) <=0:
             return {"state": "400", "message": "无更新数据！"}
         value = saveData(items)
-        saveuser(activeuser, self)
         
         if value:
             saveuser(activeuser, self)
