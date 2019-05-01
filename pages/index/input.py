@@ -51,70 +51,69 @@ def loaduser(self=None):
         users = {}
         [users.setdefault(d["uuid"], d) for d in sqlread("select * from t_user")]
         total = len(os.listdir(PLAYERDATA_DIR))
-        saveuser(activeuser, self)
-        # for nn, fp in enumerate(os.listdir(PLAYERDATA_DIR)):
-        #     uuid = str(fp.split(".")[0])
-        #     file = nbt.load(os.path.join(PLAYERDATA_DIR, fp))
-        #     userobj = file.root["bukkit"]
-        #     firstLogout = timestr(userobj["lastPlayed"])
-        #     firstLogouti = datetime.datetime.strptime(firstLogout, "%Y-%m-%d %H:%M:%S")
-        #     # firstLogoutt = datetime.datetime(*firstLogouti[:6])
+        for nn, fp in enumerate(os.listdir(PLAYERDATA_DIR)):
+            uuid = str(fp.split(".")[0])
+            file = nbt.load(os.path.join(PLAYERDATA_DIR, fp))
+            userobj = file.root["bukkit"]
+            firstLogout = timestr(userobj["lastPlayed"])
+            firstLogouti = datetime.datetime.strptime(firstLogout, "%Y-%m-%d %H:%M:%S")
+            # firstLogoutt = datetime.datetime(*firstLogouti[:6])
 
-        #     firstLogin = timestr(userobj["firstPlayed"])
-        #     firstLoginti = datetime.datetime.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
-        #     # firstLogint = datetime.datetime(*firstLoginti[:6])
+            firstLogin = timestr(userobj["firstPlayed"])
+            firstLoginti = datetime.datetime.strptime(firstLogin, "%Y-%m-%d %H:%M:%S")
+            # firstLogint = datetime.datetime(*firstLoginti[:6])
 
-        #     if uuid in users:
-        #         uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
-        #         if "player" not in uname: 
-        #             uname = userobj["lastKnownName"]
-        #         else:
-        #             uname = uname["player"]
-        #         if dt.month == firstLoginti.month and dt.day == firstLoginti.day:
-        #             if abs((dt-firstLogouti).days)<90:
-        #                 birthplayers.append(uname)
+            if uuid in users:
+                uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
+                if "player" not in uname: 
+                    uname = userobj["lastKnownName"]
+                else:
+                    uname = uname["player"]
+                if dt.month == firstLoginti.month and dt.day == firstLoginti.day:
+                    if abs((dt-firstLogouti).days)<90:
+                        birthplayers.append(uname)
 
-        #         if str(users[uuid]["lastplayed"]) != firstLogout:
-        #             if abs((dt-firstLogouti).days)>90:
-        #                 oldplayers.append(uname)
-        #             item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
-        #                     {"name": "lastplayed", "value": firstLogout},
-        #                     {"name": "uname", "value": uname},
-        #                     {"name": "updatetime", "value": dt},
-        #                     ]
-        #             activeuser.setdefault(uuid, "")
-        #             dailyname.append(uname)
-        #         else:
-        #             continue
-        #     else:
-        #         firstLogin = timestr(userobj["firstPlayed"])
-        #         item = [{"tablename": "t_user", "type": "insert", "name": "id", "value": get_serial()},
-        #                 {"name": "uuid", "value": str(fp.split(".")[0])},
-        #                 {"name": "uname", "value": uname},
-        #                 {"name": "nameinfo", "value": str([])},
-        #                 {"name": "firstplayed", "value": firstLogin},
-        #                 {"name": "lastplayed", "value": firstLogout},
-        #                 {"name": "updatetime", "value": dt},
-        #                 ]
-        #         newname.append(uname)
-        #         activeuser.setdefault(uuid, "")
-        #     items.append(item)
-        #     sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
-        #     sys.stdout.flush()
-        # if len(items) <=0:
-        #     return {"state": "400", "message": "无更新数据！"}
-        # value = saveData(items)
+                if str(users[uuid]["lastplayed"]) != firstLogout:
+                    if abs((dt-firstLogouti).days)>90:
+                        oldplayers.append(uname)
+                    item = [{"tablename": "t_user", "type": "update", "itemid": "uuid", "value": uuid},
+                            {"name": "lastplayed", "value": firstLogout},
+                            {"name": "uname", "value": uname},
+                            {"name": "updatetime", "value": dt},
+                            ]
+                    activeuser.setdefault(uuid, "")
+                    dailyname.append(uname)
+                else:
+                    continue
+            else:
+                firstLogin = timestr(userobj["firstPlayed"])
+                item = [{"tablename": "t_user", "type": "insert", "name": "id", "value": get_serial()},
+                        {"name": "uuid", "value": str(fp.split(".")[0])},
+                        {"name": "uname", "value": uname},
+                        {"name": "nameinfo", "value": str([])},
+                        {"name": "firstplayed", "value": firstLogin},
+                        {"name": "lastplayed", "value": firstLogout},
+                        {"name": "updatetime", "value": dt},
+                        ]
+                newname.append(uname)
+                activeuser.setdefault(uuid, "")
+            items.append(item)
+            sys.stdout.write("\r共" + str(total) + "个用户, 当前读取第" + str(nn) + "个用户,用户名" + str(uname))
+            sys.stdout.flush()
+        if len(items) <=0:
+            return {"state": "400", "message": "无更新数据！"}
+        value = saveData(items)
         
-        # if value:
-        #     saveuser(activeuser, self)
-        #     if len(birthplayers)<=0:
-        #         message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天(90天内有登录)**\n Happy Birthday: " + "暂无" + "\n **方块统计** \n 待续......"
-        #     else:
-        #         message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天(90天内有登录)**\n Happy Birthday: " + ", ".join(str(x) for x in birthplayers) + "\n **方块统计** \n 待续......"
-        #     send(message, webhook)
-        # else:
-        #     if self is not None:
-        #         return {"state": "300", "message": "保存失败！"}
+        if value:
+            saveuser(activeuser, self)
+            if len(birthplayers)<=0:
+                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天(90天内有登录)**\n Happy Birthday: " + "暂无" + "\n **方块统计** \n 待续......"
+            else:
+                message = "**玩家统计** \n 昨日活跃玩家数: " + str(len(dailyname)+len(newname)) + ", 其中，新玩家数: " + str(len(newname)) + ", 老玩家回归数(90天): " + str(len(oldplayers)) + "\n **历史上的今天(90天内有登录)**\n Happy Birthday: " + ", ".join(str(x) for x in birthplayers) + "\n **方块统计** \n 待续......"
+            send(message, webhook)
+        else:
+            if self is not None:
+                return {"state": "300", "message": "保存失败！"}
 
 
 def saveuser(activeuser, self=None):
@@ -175,8 +174,8 @@ def saveuser(activeuser, self=None):
         total = len(os.listdir(STATS_DIR))
         for nn, fp in enumerate(os.listdir(STATS_DIR)):
             uuid = str(fp.split(".")[0])
-            # if uuid not in activeuser:
-            #     continue
+            if uuid not in activeuser:
+                continue
             if uuid not in users:
                 print('\n' + uuid + "属性无用户资料")
                 continue

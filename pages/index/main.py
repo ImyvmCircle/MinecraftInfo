@@ -16,34 +16,35 @@ tablename = ""
 
 class IndexHandler(RequestHandler):
     def setget(self, *args, **kwargs):
-        zxsc = sqlread("SELECT a.cs,b.uname,b.id from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.playOneMinute' ORDER BY a.cs desc LIMIT 10")
-        [z.setdefault("sc", str(datetime.timedelta(seconds=z["cs"] / 20)).replace(" days,", 'd').split(".")[0].replace(':', 'h ', 1).replace(':', 'm ', 1) + "s") for z in zxsc]
+        zxsc = sqlread("SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:play_one_minute\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:custom\".\"minecraft:play_one_minute\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:play_one_minute\"') desc LIMIT 10")
 
-        zskkc = sqlread("SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.diamond_ore' ORDER BY a.cs desc LIMIT 10")
+        [z.setdefault("sc", str(datetime.timedelta(seconds=(int(z["cs"]) / 20))).replace(" days,", 'd').split(".")[0].replace(':', 'h ', 1).replace(':', 'm ', 1) + "s") for z in zxsc]
+
+        zskkc = sqlread("SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:diamond_ore\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:mined\".\"minecraft:diamond_ore\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:diamond_ore\"') desc LIMIT 10")
 
         stkc = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.stone' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:stone\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:mined\".\"minecraft:stone\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:stone\"') desc LIMIT 10")
 
         qcfx = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.aviateOneCm' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:aviate_one_cm\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:custom\".\"minecraft:aviate_one_cm\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:aviate_one_cm\"') desc LIMIT 10")
 
         walk = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.walkOneCm' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:walk_one_cm\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:custom\".\"minecraft:walk_one_cm\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:walk_one_cm\"') desc LIMIT 10")
 
         horseOneCm = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.horseOneCm' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:horse_one_cm\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:custom\".\"minecraft:horse_one_cm\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:horse_one_cm\"') desc LIMIT 10")
 
         mobKills = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mobKills' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:mob_kills\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:custom\".\"minecraft:mob_kills\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:mob_kills\"') desc LIMIT 10")
 
         pigOneCm = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.pigOneCm' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:pig_one_cm\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:custom\".\"minecraft:pig_one_cm\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:custom\".\"minecraft:pig_one_cm\"') desc LIMIT 10")
 
         minequartz_ore = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.quartz_ore' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:nether_quartz_ore\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:mined\".\"minecraft:nether_quartz_ore\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:nether_quartz_ore\"') desc LIMIT 10")
 
         mineclay = sqlread(
-            "SELECT cs, b.* from t_user_action a LEFT JOIN t_user b on a.pid=b.id where a.lx='stat.mineBlock.minecraft.clay' ORDER BY a.cs desc LIMIT 10")
+            "SELECT json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:clay\"') as cs, b.* from t_user_stats a LEFT JOIN t_user b on a.id=b.id where json_contains_path(a.stats, 'one', '$.\"stats\".\"minecraft:mined\".\"minecraft:clay\"') ORDER BY json_extract(a.stats, '$.\"stats\".\"minecraft:mined\".\"minecraft:clay\"') desc LIMIT 10")
 
         return self.render(os.path.join(PAGES_DIR, 'index\\main.html').replace('\\', '/'),
                            zxsc=zxsc, zskkc=zskkc, stkc=stkc, qcfx=qcfx, walk=walk, horseOneCm=horseOneCm, mobKills=mobKills, pigOneCm=pigOneCm,
@@ -150,8 +151,8 @@ class userInfoHandler(RequestHandler):
     def setpost(self, *args, **kwargs):
         userid = self.get_argument("userid")
         user = sqldefensereadone("select * from t_user where id=%s", [userid])
-        action = sqldefenseread("select * from t_user_action where pid=%s", [userid])
-        return self.write(json.dumps({"user":user, "action": action}, cls=JsonEncoder))
+        stats = sqldefenseread("select * from t_user_stats where id=%s", [userid])
+        return self.write(json.dumps({"user":user, "stats": stats}, cls=JsonEncoder))
 
 
 urls = [
