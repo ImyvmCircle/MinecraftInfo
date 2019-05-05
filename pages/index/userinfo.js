@@ -1,6 +1,8 @@
 $(function () {
     var x;
     var y;
+    var body = (document.compatMode && document.compatMode == 'CSS1Compat') ? document.documentElement : document.body;
+    var heigth = body.clientHeight - 186 - 20;
 
     function onMouseUpdate(e) {
         x = e.pageX;
@@ -28,7 +30,11 @@ $(function () {
         generalstr += "</tbody></table>";
         $("#general").html(generalstr);
 
-        var itemsstr = "<table class=\"table table-dark\"><thead><tr><th scope=\"col\">Itmes</th><th scope=\"col\">Broken</th><th scope=\"col\">Crafted</th><th scope=\"col\">Dropped</th><th scope=\"col\">Mined</th><th scope=\"col\">Picked up</th></tr></thead><tbody>";
+        var itemsstr = "<div id='tablehead'><table class=\"table table-dark\"><thead><tr><th scope=\"col\" style='width: 15%;word-break:break-word;'>Itmes</th>" +
+            "<th scope=\"col\" style='width: 17%;word-break:break-word;'>Broken</th>" +
+            "<th scope=\"col\" style='width: 17%;word-break:break-word;'>Crafted</th><th scope=\"col\" style='width: 17%;word-break:break-word;'>Dropped</th>" +
+            "<th scope=\"col\" style='width: 17%;word-break:break-word;'>Mined</th><th scope=\"col\" style='width: 17%;word-break:break-word;'>Picked up</th>" +
+            "</tr></thead></table></div><div style='overflow-y: scroll;height: "+(heigth)+"px;'><table class='table table-dark' style='margin-top: 0;'><tbody>";
         items = items_json.lang_en["minecraft:items"];
         for (i in items){
             var item = items[i];
@@ -40,9 +46,13 @@ $(function () {
             var Mined = infos.stats['minecraft:mined'][item.id] || "-";
             var Picked_up = infos.stats['minecraft:picked_up'][item.id] || "-";
             var mc_tip = "<div class=\"mc-tooltip\"><div class=\"mc-tooltip-title\">"+name+"</div><div class=\"mc-tooltip-description\">"+item.id+"</div></div>";
-            itemsstr += "<tr><th scope=\"row\">"+"<div class=\"mc-container\"><img src="+texture+" class=\"ingredient-img\" draggable=\"true\">"+mc_tip+"</div>"+"</th><td>"+Broken+"</td><td>"+Crafted+"</td><td>"+Dropped+"</td><td>"+Mined+"</td><td>"+Picked_up+"</td></tr>";
+            itemsstr += "<tr><td scope=\"row\" style='width: 15%;'>" +
+                "<div class=\"mc-container\"><img src="+texture+" class=\"ingredient-img\" draggable=\"true\">"+mc_tip+"</div>" +
+                "</td><td style='width: 17%;'>"+Broken+"</td><td style='width: 17%;'>"+Crafted+"</td>" +
+                "<td style='width: 17%;'>"+Dropped+"</td><td style='width: 17%;'>"+Mined+"</td>" +
+                "<td style='width: 17%;'>"+Picked_up+"</td></tr>";
         }
-        itemsstr += "</tbody></table>";
+        itemsstr += "</tbody></table></div>";
         $("#items").html(itemsstr);
 
         $("#entity").html("<h5>Killed</h5> <br>" +
