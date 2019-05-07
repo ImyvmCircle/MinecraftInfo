@@ -99,7 +99,7 @@
             margin-top: 4px
         }
 
-        .mc-container .mc-tooltip{
+        .mc-container .mc-tooltip {
             display: none;
         }
 
@@ -110,20 +110,25 @@
         .rank ol {
             padding-right: 30px;
         }
-        .nav-item>.active{
+
+        .nav-item > .active {
             background-color: green !important;
             color: #fff !important;
         }
-        .nav-link{
+
+        .nav-link {
             color: green !important;
         }
+
         .page-item.active .page-link {
             background-color: green !important;
             border-color: green !important;
         }
-        .page-link{
+
+        .page-link {
             color: black !important;
         }
+<<<<<<< HEAD
         /* thead, tbody {
             display: block;
         } */
@@ -132,13 +137,31 @@
             overflow-x: hidden;
             height: 100vh;
         }
+=======
+        #tablehead{
+                padding-right: 17px;
+        }
+        @media (max-width: 500px){
+            #items .table th,#items .table td{
+                padding: 1px;
+            }
+
+            #tablehead{
+                padding-right: 0;
+            }
+        }
+        .table{
+            margin-bottom:0;
+        }
+
+>>>>>>> 751c1626080c9d005785d51ca8d6de42c60ab481
     </style>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
-        <div class="container">
-            <a class="navbar-brand" href="/" style="color: green"><h5>竹萌</h5></a>
-        </div>
+    <div class="container">
+        <a class="navbar-brand" href="/" style="color: green"><h5>竹萌</h5></a>
+    </div>
 </nav>
 
 
@@ -146,11 +169,11 @@
 <div id='actioninfo'></div>
 
 <div class="jumbotron" style="padding-top:2%;">
-    
 
-    <div class="container" id="myTabs" >
+
+    <div class="container" id="myTabs">
         <div class="card">
-            <div class="card-body"  id='userinfo'>
+            <div class="card-body" id='userinfo'>
             </div>
         </div>
 
