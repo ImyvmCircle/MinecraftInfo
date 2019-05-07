@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from general.project_general import JsonEncoder
-from site_config.dblink import sqlread, sqlreadone, sqldefenseread, sqldefensereadone, moneysqldefensereadone, \
-    moneysqldefenseread
+from site_config.dblink import sqlread, sqlreadone, sqldefenseread, sqldefensereadone
 import json
 import datetime
 import os
@@ -120,14 +119,14 @@ class loadMenoyUserListHandler(RequestHandler):
         total = sqldefensereadone(tsql + sqlwhere, params)["num"]
         sql += sqlwhere + orderbylx + " limit %s, %s"
         params.extend([(page - 1) * rows, rows])
-        items = moneysqldefenseread(sql, params)
+        items = sqldefenseread(sql, params)
         return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
 
 class moneyInfoHandler(RequestHandler):
     def setget(self, *args, **kwargs):
         uuid = self.get_argument("uuid")
-        uname = moneysqldefensereadone("select player from inventory.eco_accounts where player_uuid='%s'", [uuid])['player']
+        uname = sqldefensereadone("select player from inventory.eco_accounts where player_uuid='%s'", [uuid])['player']
         return self.render(os.path.join(PAGES_DIR, 'index\\moneyinfo.html').replace('\\', '/'), uuid=uuid, uname=uname)
 
     def setpost(self, *args, **kwargs):
@@ -138,9 +137,9 @@ class moneyInfoHandler(RequestHandler):
         sql = """select *,newevent - oldevent as je from inventory.eventlog a where newevent!=oldevent and uuid='%s'""" % uuid
         tsql = "select count(*) as num from inventory.eventlog where newevent!=oldevent and uuid='%s'" % uuid
 
-        total = moneysqldefensereadone(tsql + sqlwhere, [])["num"]
+        total = sqldefensereadone(tsql + sqlwhere, [])["num"]
         sql += sqlwhere + " order by eventtime desc limit %s, %s" % ((page - 1) * rows, rows)
-        items = moneysqldefenseread(sql, [])
+        items = sqldefenseread(sql, [])
         return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
 

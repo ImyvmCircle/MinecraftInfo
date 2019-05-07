@@ -5,7 +5,7 @@ import gridfs
 import mysql.connector
 import sys
 
-from site_config.setting import dbconfig, dbconfig1
+from site_config.setting import dbconfig
 
 __author__ = 'Jian'
 
@@ -84,58 +84,6 @@ def sqldefensereadone(sql, params):
     assert isinstance(params, list)
     try:
         conn, cursor = mysqlConn()
-        cursor.execute(sql, tuple(params))
-        data = cursor.fetchone()
-        if data is None:
-            return {}
-        # print(sql % tuple(params))
-        tblist = descriptionList(cursor.description)
-        mysqlClose(cursor, conn)
-        item = dict(zip(tblist, data))
-        return item
-    except mysql.connector.Error as e:
-        print(e)
-        print(sql % tuple(params))
-        return []
-
-
-# 安全的多数据查询
-def moneysqldefenseread(sql, params):
-    """
-    安全的多数据查询,防止sql注入攻击的方法
-    :param sql:查询语句
-    :param params:列表参数
-    :return:字典
-    """
-    assert isinstance(params, list)
-    try:
-        conn, cursor = mysqlConn1()
-        cursor.execute(sql, tuple(params))
-        # print(sql % tuple(params))
-        datas = cursor.fetchall()
-        if len(datas) <= 0:
-            return []
-        tblist = descriptionList(cursor.description)
-        mysqlClose(cursor, conn)
-        items = [dict(zip(tblist, data)) for data in datas]
-        return items
-    except mysql.connector.Error as e:
-        print(e)
-        print(sql % tuple(params))
-        return []
-
-
-# 安全的单数据查询
-def moneysqldefensereadone(sql, params):
-    """
-    安全的单数据查询
-    :param sql:查询语句
-    :param params:列表参数
-    :return:字典
-    """
-    assert isinstance(params, list)
-    try:
-        conn, cursor = mysqlConn1()
         cursor.execute(sql, tuple(params))
         data = cursor.fetchone()
         if data is None:
