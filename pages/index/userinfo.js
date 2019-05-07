@@ -23,11 +23,11 @@ $(function () {
         infos = JSON.parse(datas.stats[0].stats);
 
         custom = infos.stats['minecraft:custom'];
-        var generalstr = "<table class=\"table table-dark\"><tbody>";
+        var generalstr = "<div class=\"container\"><div class=\"table-responsive-sm\"><table class=\"table table-dark\"><tbody>";
         for (i in custom) {
             generalstr += "<tr><th scope=\"row\">"+ general_json.lang_cn["minecraft:custom"][i] + "</th><td>" + custom[i] + "</td></tr>";
         }
-        generalstr += "</tbody></table>";
+        generalstr += "</tbody></table></div></div>";
         $("#general").html(generalstr);
 
         var itemsstr = "<div id='tablehead'><table class=\"table table-dark\"><thead><tr><th scope=\"col\" style='width: 15%;word-break:break-word;'>Itmes</th>" +
