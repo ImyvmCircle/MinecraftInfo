@@ -17,8 +17,9 @@ def mysqlConn():
         cursor = conn.cursor()
     except mysql.connector.Error as e:
         print(e)
-        conn = None
-        cursor = None
+        # conn = None
+        # cursor = None
+        conn, cursor = mysqlConn()
     return conn, cursor
 
 
