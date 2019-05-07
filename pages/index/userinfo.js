@@ -2,7 +2,7 @@ $(function () {
     var x;
     var y;
     var body = (document.compatMode && document.compatMode == 'CSS1Compat') ? document.documentElement : document.body;
-    var heigth = body.clientHeight - 186 - 20;
+    var heigth = body.clientHeight - 186 - 50;
 
     function onMouseUpdate(e) {
         x = e.pageX;
@@ -34,7 +34,7 @@ $(function () {
             "<th scope=\"col\" style='width: 17%;word-break:break-word;'>Broken</th>" +
             "<th scope=\"col\" style='width: 17%;word-break:break-word;'>Crafted</th><th scope=\"col\" style='width: 17%;word-break:break-word;'>Dropped</th>" +
             "<th scope=\"col\" style='width: 17%;word-break:break-word;'>Mined</th><th scope=\"col\" style='width: 17%;word-break:break-word;'>Picked up</th>" +
-            "</tr></thead></table></div><div style='overflow-y: scroll;height: "+(heigth)+"px;'><table class='table table-dark' style='margin-top: 0;'><tbody>";
+            "</tr></thead></table></div id='tablebody'><div style='overflow-y: scroll;height: "+(heigth)+"px;'><table class='table table-dark' style='margin-top: 0;'><tbody>";
         items = items_json.lang_en["minecraft:items"];
         for (i in items){
             var item = items[i];
