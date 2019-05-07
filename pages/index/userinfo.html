@@ -18,6 +18,14 @@
     <script src="/pages/index/userinfo.js"></script>
 
     <style>
+        @font-face {
+            font-family: 'Minecraft';
+            src: url(/static/Minecraft.woff);
+        }
+
+        body {
+            font-family: 'Minecraft';
+        }
         .rank {
             box-sizing: border-box;
             margin-top: 10px;
@@ -115,6 +123,14 @@
         }
         .page-link{
             color: black !important;
+        }
+        /* thead, tbody {
+            display: block;
+        } */
+        tbody {
+            overflow-y: scroll;
+            overflow-x: hidden;
+            height: 100vh;
         }
     </style>
 </head>

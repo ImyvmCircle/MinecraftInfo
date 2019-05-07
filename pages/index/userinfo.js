@@ -21,14 +21,18 @@ $(function () {
         infos = JSON.parse(datas.stats[0].stats);
 
         custom = infos.stats['minecraft:custom'];
-        var generalstr = "<table class=\"table table-dark\"><tbody>";
+        var generalstr = "<div class=\"container\"><div class=\"table-responsive-sm\"><table class=\"table table-dark\"><tbody>";
         for (i in custom) {
             generalstr += "<tr><th scope=\"row\">"+ general_json.lang_cn["minecraft:custom"][i] + "</th><td>" + custom[i] + "</td></tr>";
         }
-        generalstr += "</tbody></table>";
+        generalstr += "</tbody></table></div></div>";
         $("#general").html(generalstr);
 
-        var itemsstr = "<table class=\"table table-dark\"><thead><tr><th scope=\"col\">Itmes</th><th scope=\"col\">Broken</th><th scope=\"col\">Crafted</th><th scope=\"col\">Dropped</th><th scope=\"col\">Mined</th><th scope=\"col\">Picked up</th></tr></thead><tbody>";
+        var itemsstr = "<div class=\"container\"><div class=\"table-responsive-sm\">" + 
+        "<table class=\"table table-dark table-striped tableFixHead\"><thead>" + 
+        "<tr><th scope=\"col\">Itmes</th><th scope=\"col\">Broken</th>" + 
+        "<th scope=\"col\">Crafted</th><th scope=\"col\">Dropped</th>" + 
+        "<th scope=\"col\">Mined</th><th scope=\"col\">Picked up</th></tr></thead><tbody>";
         items = items_json.lang_en["minecraft:items"];
         for (i in items){
             var item = items[i];
@@ -42,7 +46,7 @@ $(function () {
             var mc_tip = "<div class=\"mc-tooltip\"><div class=\"mc-tooltip-title\">"+name+"</div><div class=\"mc-tooltip-description\">"+item.id+"</div></div>";
             itemsstr += "<tr><th scope=\"row\">"+"<div class=\"mc-container\"><img src="+texture+" class=\"ingredient-img\" draggable=\"true\">"+mc_tip+"</div>"+"</th><td>"+Broken+"</td><td>"+Crafted+"</td><td>"+Dropped+"</td><td>"+Mined+"</td><td>"+Picked_up+"</td></tr>";
         }
-        itemsstr += "</tbody></table>";
+        itemsstr += "</tbody></table></div></div>";
         $("#items").html(itemsstr);
 
         $("#entity").html("<h5>Killed</h5> <br>" +
