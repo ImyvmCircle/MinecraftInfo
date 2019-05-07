@@ -47,7 +47,7 @@ $(function () {
             var Picked_up = infos.stats['minecraft:picked_up'][item.id] || "-";
             var mc_tip = "<div class=\"mc-tooltip\"><div class=\"mc-tooltip-title\">"+name+"</div><div class=\"mc-tooltip-description\" style='color: #aaaaaa;'>"+item.id+"</div></div>";
             itemsstr += "<tr><td scope=\"row\" style='width: 15%;'>" +
-                "<div class=\"mc-container\"><img src="+texture+" class=\"ingredient-img\" draggable=\"true\">"+mc_tip+"</div>" +
+                "<div class=\"mc-container\" style='position: relative;'><img src="+texture+" class=\"ingredient-img\" draggable=\"true\">"+mc_tip+"</div>" +
                 "</td><td style='width: 17%;'>"+Broken+"</td><td style='width: 17%;'>"+Crafted+"</td>" +
                 "<td style='width: 17%;'>"+Dropped+"</td><td style='width: 17%;'>"+Mined+"</td>" +
                 "<td style='width: 17%;'>"+Picked_up+"</td></tr>";
