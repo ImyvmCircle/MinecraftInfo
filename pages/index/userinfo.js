@@ -23,16 +23,16 @@ $(function () {
         infos = JSON.parse(datas.stats[0].stats);
 
         custom = infos.stats['minecraft:custom'];
-        var generalstr = "<div class\"table-responsive\" id='tablehead'><div class= \"scrollbar\" style='overflow-y: scroll;height: "+(heigth)+"px;' id=\"style-scroll\"><table class=\"table\"><tbody>";
+        var generalstr = "<div class=\"table-responsive\" id='tablehead'><div class=\"stats_content\"><div class= \"scrollbar\" style='overflow-y: scroll;height: "+(heigth)+"px;' id=\"style-scroll\"><table class=\"table\"><tbody>";
         for (i in custom) {
             generalstr += "<tr><td id =\"general_td\">"+ general_json.lang_cn["minecraft:custom"][i] + "</td><td>" + custom[i] + "</td></tr>";
         }
-        generalstr += "</tbody></table></div></div>";
+        generalstr += "</tbody></table></div></div></div>";
         $("#general").html(generalstr);
 
         stats_icon.lang_cn[0].texture
 
-        var itemsstr = "<div class\"table-responsive\" id='tablehead'><div class= \"scrollbar\" style='overflow-y: scroll;height: "+(heigth)+"px;' id=\"style-scroll\"><table class=\"table\"><thead><tr><th scope=\"col\" style='word-break:break-word;'></th>" +
+        var itemsstr = "<div class\"table-responsive\" id='tablehead'><div class=\"stats_content\"><div class= \"scrollbar\" style='overflow-y: scroll;height: "+(heigth)+"px;' id=\"style-scroll\"><table class=\"table\"><thead><tr><th scope=\"col\" style='word-break:break-word;'></th>" +
             "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src="+stats_icon.lang_cn[0].texture+" class=\"icon-img\" title=\""+stats_icon.lang_cn[0].name+"\" draggable=\"true\"></th>" +
             "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src="+stats_icon.lang_cn[1].texture+" class=\"icon-img\" title=\""+stats_icon.lang_cn[1].name+"\" draggable=\"true\"></th>"+
             "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src="+stats_icon.lang_cn[2].texture+" class=\"icon-img\" title=\""+stats_icon.lang_cn[2].name+"\" draggable=\"true\"></th>" +
@@ -61,7 +61,7 @@ $(function () {
                 "</td><td style='width: 15%;'>"+icon_4+
                 "</td><td style='width: 15%;'>"+icon_5+"</td></tr>";
         }
-        itemsstr += "</tbody></table></div></div>";
+        itemsstr += "</tbody></table></div></div></div>";
         $("#items").html(itemsstr);
 
         $("#entity").html("<h5>Killed</h5> <br>" +
