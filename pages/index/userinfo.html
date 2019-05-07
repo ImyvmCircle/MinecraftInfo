@@ -26,14 +26,8 @@
         body {
             font-family: 'Minecraft';
         }
-        .rank {
-            box-sizing: border-box;
-            margin-top: 10px;
-            text-align: left;
-            box-shadow: 0 1px 3px #BBB;
-            color: #fff;
-            background: url("/static/images/tbg.png") repeat center;
-            padding-top: 1px;
+        td {
+            text-align: end;
         }
 
         .table {
@@ -42,16 +36,30 @@
             text-align: left;
             box-shadow: 0 1px 3px #BBB;
             color: #fff;
-            background: url("/static/images/tbg.png") repeat center;
+            background: none;
             padding-top: 1px;
+            border: none !important;
+            box-shadow: none;
         }
 
         .ingredient-img {
             image-rendering: auto;
-            background-color: #8b8b8b;
-            border-color: #373737 #373737 #373737 #373737;
-            border-style: solid;
+            background-color:  rgb(185, 185, 185);
+            border-color: rgb(185, 185, 185) rgb(255, 255, 255) rgb(255, 255, 255) rgb(185, 185, 185);
+            border-style: inset;
             border-width: 2px;
+            width: 150%;
+            height: 150%;
+        }
+
+        .icon-img {
+            image-rendering: auto;
+            background-color:  rgb(185, 185, 185);
+            border-color: rgb(255, 255, 255) rgb(185, 185, 185) rgb(185, 185, 185) rgb(255, 255, 255);
+            border-style: outset;
+            border-width: 2px;
+            width: 45px;
+            height: 45px;
         }
 
         .mc-tooltip {
@@ -128,24 +136,57 @@
         .page-link {
             color: black !important;
         }
-        #tablehead{
-                padding-right: 17px;
+        #tablehead {
+            padding-left: 10% !important;
+            padding-right: 10% !important;
+            background: url("/static/images/tbg.png") repeat center;
         }
-        @media (max-width: 500px){
-            #items .table th,#items .table td{
-                padding: 1px;
-            }
+        #style-scroll {
+            border-style: none;
+            padding-right: 5%;
+        }
 
-            #tablehead{
-                padding-right: 0;
-            }
-        }
         .table{
             margin-bottom:0;
+            margin-top: 0;
         }
 
-        #tablebody::-webkit-scrollbar-button{
-            display: none;
+        .table td{
+            vertical-align: middle;
+            border: none !important;
+            padding: 0.3%;
+            font-weight: normal !important;
+        }
+
+        .table th{
+            vertical-align: middle;
+            border: none !important;
+            font-weight: normal !important;
+        }
+
+        #style-scroll::-webkit-scrollbar-track
+        {
+            background-color:  #000000;
+        }
+
+        #style-scroll::-webkit-scrollbar
+        {
+            width: 15px;
+            background-color: #000000;
+        }
+
+        #style-scroll::-webkit-scrollbar-thumb
+        {
+            height: 20%;
+            background-color:  rgb(185, 185, 185);
+            border-color: rgb(185, 185, 185) rgb(231, 231, 231) rgb(231, 231, 231) rgb(185, 185, 185);
+            border-style: outset;
+            border-width: 2px;
+        }
+
+        #general_td
+        {
+            text-align: left;
         }
 
         .jumbotron{
