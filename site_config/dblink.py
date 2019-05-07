@@ -23,18 +23,6 @@ def mysqlConn():
     return conn, cursor
 
 
-def mysqlConn1():
-    try:
-        conn = mysql.connector.connect(**dbconfig1)
-        cursor = conn.cursor()
-    except mysql.connector.Error as e:
-        print(e)
-        # conn = None
-        # cursor = None
-        conn, cursor = mysqlConn1()
-    return conn, cursor
-
-
 # 数据库链接关闭
 def mysqlClose(cursor, conn):
     cursor.close()
