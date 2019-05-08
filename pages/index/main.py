@@ -126,7 +126,7 @@ class loadMenoyUserListHandler(RequestHandler):
 class moneyInfoHandler(RequestHandler):
     def setget(self, *args, **kwargs):
         uuid = self.get_argument("uuid")
-        uname = sqldefensereadone("select player from inventory.eco_accounts where player_uuid='%s'", [uuid])['player']
+        uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)['player']
         return self.render(os.path.join(PAGES_DIR, 'index\\moneyinfo.html').replace('\\', '/'), uuid=uuid, uname=uname)
 
     def setpost(self, *args, **kwargs):
@@ -137,9 +137,9 @@ class moneyInfoHandler(RequestHandler):
         sql = """select *,newevent - oldevent as je from inventory.eventlog a where newevent!=oldevent and uuid='%s'""" % uuid
         tsql = "select count(*) as num from inventory.eventlog where newevent!=oldevent and uuid='%s'" % uuid
 
-        total = sqldefensereadone(tsql + sqlwhere, [])["num"]
+        total = sqlreadone(tsql + sqlwhere)["num"]
         sql += sqlwhere + " order by eventtime desc limit %s, %s" % ((page - 1) * rows, rows)
-        items = sqldefenseread(sql, [])
+        items = sqlread(sql)
         return self.write(json.dumps({"rows": items, "total": total}, cls=JsonEncoder))
 
 
