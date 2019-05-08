@@ -40,8 +40,30 @@
 
         #data_user{
             padding-bottom: 5%;
-            padding-top: 5%;
+            padding-top: 2%;
             background: url("/static/images/tbg.png") repeat center;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        .page-item.active .page-link {
+            background-color: green !important;
+            border-color: green !important;
+        }
+
+        .page-link {
+            color: black !important;
+        }
+        .table td {
+            vertical-align: middle;
+            border: none !important;
+            padding: 0.3%;
+            font-weight: normal !important;
+        }
+        .table th{
+            vertical-align: middle;
+            border: none !important;
+            font-weight: normal !important;
         }
     </style>
 </head>
@@ -56,8 +78,9 @@
 
 <div class="jumbotron">
     <input type="hidden" id="uuid" value="{{ uuid }}"/>
-    <div class="container" id="data_user">
-        <h3>{{ uname }}</h3>
+    <div class="container">
+        <div id="data_user">
+        <h3 style="color:#fff">{{ uname }}</h3>
         <div class="table-responsive" id="tablehead">
             <table class="table">
                 <thead>
@@ -80,6 +103,7 @@
                 </tbody>
             </table>
         </div>
+    </div>
         <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
         </nav>
     </div>
