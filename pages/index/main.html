@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,299 +20,382 @@
     <style>
         @font-face {
             font-family: 'Minecraft';
-            src: url(/static/Minecraft.woff);
+            src: url(/static/Minecraft-Regular.otf);
         }
 
         body {
             font-family: 'Minecraft';
         }
-        
-        .rank {
-            box-sizing: border-box;
-            margin-top: 10px;
-            text-align: center;
-            box-shadow: 0 1px 3px #BBB;
+
+        .rank-mc {
             color: #fff;
+            text-align: center;
+            font-size: 110%;
+            vertical-align: top;
             background: url("/static/images/tbg.png") repeat center;
-            padding-top: 1px;
+            padding-bottom: 6%;
+            padding-top: 1%;
         }
 
-        .rank ol {
-            padding-right: 30px;
-        }
-        .nav-item>.active{
+        .nav-item>.active {
             background-color: green !important;
             color: #fff !important;
         }
-        .nav-link{
+
+        .nav-link {
             color: green !important;
         }
+
         .page-item.active .page-link {
             background-color: green !important;
             border-color: green !important;
         }
-        .page-link{
+
+        .page-link {
             color: black !important;
         }
+
+        #rank_id {
+            text-align: left;
+            cursor: pointer;
+        }
+
+        #rank_sq {
+            text-align: right;
+        }
+
+        .table td {
+            vertical-align: middle;
+            border: none !important;
+            padding: 0.3%;
+            font-weight: normal !important;
+        }
+        .table th{
+            vertical-align: middle;
+            border: none !important;
+            font-weight: normal !important;
+        }
+        .table {
+            margin-bottom: 0;
+            color: #fff;
+            padding-left: 5%;
+        }
+        #tablehead {
+            background: url("/static/images/bg.png") repeat center;
+            padding-right: 5%;
+            padding-left: 10%;
+        }
+
+        #data_user{
+            padding-bottom: 5%;
+            padding-top: 5%;
+            background: url("/static/images/tbg.png") repeat center;
+        }
+
+        .col-md-6 {
+            padding-bottom: 2%;
+        }
+
     </style>
 </head>
+
 <body>
-{% raw xsrf_form_html() %}
+    {% raw xsrf_form_html() %}
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <a class="navbar-brand" href="#" style="color: green"><h5>竹萌</h5></a>
-        <form class="form-inline" onsubmit="return false;">
-            <input id="input-none" type="text" placeholder="" class="form-control"
-                   onchange="SearchuUser(this.value)">
-        </form>
-    </div>
-</nav>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="color: green">
+                <h5>竹萌</h5>
+            </a>
+            <form class="form-inline" onsubmit="return false;">
+                <input id="input-none" type="text" placeholder="" class="form-control"
+                    onchange="SearchuUser(this.value)">
+            </form>
+        </div>
+    </nav>
 
-<div class="jumbotron" style="padding-top:2%;">
+    <div class="jumbotron" style="padding-top:2%;">
 
-    <div class="container" id="myTabs" >
-        <ul class="nav nav-pills mb-3" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" href="#record" aria-controls="record" role="tab" data-toggle="pill" aria-selected="true">
-                    记录排行
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#friend" aria-controls="friend" role="tab" data-toggle="pill" aria-selected="false">
-                    萌友们
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#menoylog" aria-controls="menoylog" role="tab" data-toggle="pill" aria-selected="false">
-                    金钱记录
-                </a>
-            </li>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="record">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>在线时长</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in zxsc %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["sc"] }}</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
+        <div class="container" id="myTabs">
+            <ul class="nav nav-pills mb-3" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#record" aria-controls="record" role="tab" data-toggle="pill"
+                        aria-selected="true">
+                        记录排行
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#friend" aria-controls="friend" role="tab" data-toggle="pill"
+                        aria-selected="false">
+                        萌友们
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#menoylog" aria-controls="menoylog" role="tab" data-toggle="pill"
+                        aria-selected="false">
+                        金钱记录
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="record">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                在线时长
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in zxsc %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ i["sc"] }}</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                钻石矿开采
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in zskkc %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>钻石矿开采</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in zskkc %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["cs"] }}块</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                鞘翅飞行
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in qcfx %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                石头开采
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in stkc %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                行走距离
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in walk %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                骑马移动距离
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in horseOneCm %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                生物击杀次数
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in mobKills %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ i["cs"] }}次</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                骑猪移动距离
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in pigOneCm %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                石英矿开采数
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in minequartz_ore %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="rank-mc">
+                                粘土块开采数
+                                    <div class="table-responsive" id='tablehead'>
+                                        <table class="table">
+                                            <tbody>
+                                                {% for i in mineclay %}
+                                                <tr>
+                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                        {{ i["uname"] }}</td>
+                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
+                                                </tr>
+                                                {% end %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>鞘翅飞行</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in qcfx %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ int(i["cs"])/100 }}米</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>石头开采</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in stkc %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["cs"] }}块</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
+                <div role="tabpanel" class="tab-pane" id="friend">
+                    <div id="data_user">
+                    <div class="table-responsive" id="tablehead">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>用户名</th>
+                                    <th>初次登陆时间</th>
+                                    <th>最后离线时间</th>
+                                    <th>数据更新日期</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userlist">
+                                <tr onclick="lookinfo('@id')" style="cursor: pointer;">
+                                    <td>@@rowsnumber@@</td>
+                                    <td>@uname</td>
+                                    <td>@firstplayed</td>
+                                    <td>@lastplayed</td>
+                                    <td>@updatetime</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>行走距离</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in walk %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ int(i["cs"])/100 }}米</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>骑马移动距离</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in horseOneCm %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ int(i["cs"])/100 }}米</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
-                    </div>
+                    <nav aria-label="Page navigation" id="pageination">
+                    </nav>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>生物击杀次数</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in mobKills %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["cs"] }}次</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
+                <div role="tabpanel" class="tab-pane" id="menoylog">
+                        <div id="data_user">
+                    <div class="table-responsive" id="tablehead">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>用户名</th>
+                                    <th onclick="px('money', this)" style="cursor: pointer;">当前存款<span></span></th>
+                                    <th onclick="px('monout', this)" style="cursor: pointer;">总支出<span></span></th>
+                                    <th onclick="px('monin', this)" style="cursor: pointer;">总收入<span></span></th>
+                                </tr>
+                            </thead>
+                            <tbody id="menoyuserlist">
+                                <tr onclick="lookmenoy('@uuid')" style="cursor: pointer;">
+                                    <td>@@rowsnumber@@</td>
+                                    <td>@player</td>
+                                    <td>@money</td>
+                                    <td>@monout</td>
+                                    <td>@monin</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>骑猪移动距离</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in pigOneCm %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ int(i["cs"])/100 }}米</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>石英矿开采数</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in minequartz_ore %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["cs"] }}块</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="rank">
-                            <h5>粘土块开采数</h5>
-                            <ol style='margin-top: 10px;background: url("/static/images/bg.png") repeat center;padding-top: 10px;padding-bottom: 10px;'>
-                                {% for i in mineclay %}
-                                <li>
-                                    <div style="display: none">{{ i["id"] }}</div>
-                                    <div style="float: left;cursor: pointer;" onclick="lookinfo('{{ i["id"] }}')">{{ i["uname"] }}</div>
-                                    <div style="float: right;">{{ i["cs"] }}块</div>
-                                </li>
-                                {% end %}
-                            </ol>
-                            <p>&nbsp;</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="friend">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>用户名</th>
-                            <th>初次登陆时间</th>
-                            <th>最后离线时间</th>
-                            <th>数据更新日期</th>
-                        </tr>
-                        </thead>
-                        <tbody id="userlist">
-                        <tr onclick="lookinfo('@id')" style="cursor: pointer;">
-                            <td>@@rowsnumber@@</td>
-                            <td>@uname</td>
-                            <td>@firstplayed</td>
-                            <td>@lastplayed</td>
-                            <td>@updatetime</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <nav aria-label="Page navigation" id="pageination">
-                </nav>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="menoylog">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>序号</th>
-                            <th>用户名</th>
-                            <th onclick="px('money', this)" style="cursor: pointer;">当前存款<span></span></th>
-                            <th onclick="px('monout', this)" style="cursor: pointer;">总支出<span></span></th>
-                            <th onclick="px('monin', this)" style="cursor: pointer;">总收入<span></span></th>
-                        </tr>
-                        </thead>
-                        <tbody id="menoyuserlist">
-                        <tr onclick="lookmenoy('@uuid')" style="cursor: pointer;">
-                            <td>@@rowsnumber@@</td>
-                            <td>@player</td>
-                            <td>@money</td>
-                            <td>@monout</td>
-                            <td>@monin</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <nav aria-label="Page navigation" id="menoypageination">
-                </nav>
+                    <nav aria-label="Page navigation" id="menoypageination">
+                    </nav>
 
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container">
-    <footer>
-        <p>健健技术支持</p>
-    </footer>
-</div> <!-- /container -->
+    <div class="container">
+        <footer>
+            <p>健健技术支持</p>
+        </footer>
+    </div> <!-- /container -->
 
 </body>
+
 </html>

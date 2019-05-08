@@ -26,24 +26,27 @@
         body {
             font-family: 'Minecraft';
         }
+
+        .table {
+            margin-bottom: 0;
+            color: #fff;
+            padding-left: 5%;
+        }
+        #tablehead {
+            background: url("/static/images/bg.png") repeat center;
+            padding-right: 5%;
+            padding-left: 10%;
+        }
+
+        #data_user{
+            padding-bottom: 5%;
+            padding-top: 5%;
+            background: url("/static/images/tbg.png") repeat center;
+        }
     </style>
 </head>
 <body>
 {% raw xsrf_form_html() %}
-<!-- <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">竹萌</a>
-        </div>
-    </div>
-</nav> -->
 
 <nav class="navbar navbar-inverse">
         <div class="container">
@@ -53,10 +56,10 @@
 
 <div class="jumbotron">
     <input type="hidden" id="uuid" value="{{ uuid }}"/>
-    <div class="container">
+    <div class="container" id="data_user">
         <h3>{{ uname }}</h3>
-        <div class="table-responsive">
-            <table class="table table-striped">
+        <div class="table-responsive" id="tablehead">
+            <table class="table">
                 <thead>
                 <tr>
                     <th>序号</th>
