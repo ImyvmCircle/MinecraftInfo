@@ -21,12 +21,12 @@ $(function () {
         stats_icon.lang_cn[0].texture
 
         var itemsstr = "<div class\"table-responsive\" id='tablehead'><h4 style=\"text-align: center;color:#fff;\">物品</h4><div class=\"stats_content\"><div class= \"scrollbar\" style='overflow-y: scroll;height: " + (heigth) + "px;' id=\"style-scroll\"><table class=\"table\"><thead><tr><th scope=\"col\" style='word-break:break-word;'></th>" +
-            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[0].texture + " class=\"icon-img\" title=\"" + stats_icon.lang_cn[0].name + "\" draggable=\"true\"></th>" +
-            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[1].texture + " class=\"icon-img\" title=\"" + stats_icon.lang_cn[1].name + "\" draggable=\"true\"></th>" +
-            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[2].texture + " class=\"icon-img\" title=\"" + stats_icon.lang_cn[2].name + "\" draggable=\"true\"></th>" +
-            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[3].texture + " class=\"icon-img\" title=\"" + stats_icon.lang_cn[3].name + "\" draggable=\"true\"></th>" +
-            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[4].texture + " class=\"icon-img\" title=\"" + stats_icon.lang_cn[4].name + "\" draggable=\"true\"></th>" +
-            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[5].texture + " class=\"icon-img\" title=\"" + stats_icon.lang_cn[5].name + "\" draggable=\"true\"></th>" +
+            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[0].texture + " title=\"" + stats_icon.lang_cn[0].name + "\" id = \"icon-image\"></th>" +
+            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[1].texture + " title=\"" + stats_icon.lang_cn[1].name + "\" id = \"icon-image\"></th>" +
+            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[2].texture + " title=\"" + stats_icon.lang_cn[2].name + "\" id = \"icon-image\"></th>" +
+            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[3].texture + " title=\"" + stats_icon.lang_cn[3].name + "\" id = \"icon-image\"></th>" +
+            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[4].texture + " title=\"" + stats_icon.lang_cn[4].name + "\" id = \"icon-image\"></th>" +
+            "<th scope=\"col\" style='word-break:break-word;text-align: end;'><img src=" + stats_icon.lang_cn[5].texture + " title=\"" + stats_icon.lang_cn[5].name + "\" id = \"icon-image\"></th>" +
             "</tr></thead><tbody>";
 
         $.getJSON("/static/json/items.json", function (items_data) {
@@ -44,7 +44,8 @@ $(function () {
                 var icon_5 = infos.stats[stats_icon.lang_cn[5].id][item.id] || "0";
                 var mc_tip = "<div class=\"mc-tooltip\"><div class=\"mc-tooltip-title\">" + name + "</div><div class=\"mc-tooltip-description\" style='color: #aaaaaa;'>" + item.id + "</div></div>";
                 itemsstr += "<tr><td scope=\"row\" style='width: 10%;'>" +
-                    "<div class=\"mc-container\" style='position: relative;width: 32px;'><img src=" + texture + " class=\"ingredient-img\" draggable=\"true\">" + mc_tip + "</div>" +
+                    "<div class=\"mc-container\" style='position: relative;width: 32px;'>" +
+                    "<img src=" + texture + ">" + mc_tip + "</div>" +
                     "</td><td style='width: 15%;'>" + icon_0 +
                     "</td><td style='width: 15%;'>" + icon_1 +
                     "</td><td style='width: 15%;'>" + icon_2 +
