@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,13 +33,14 @@
             color: #fff;
             padding-left: 5%;
         }
+
         #tablehead {
             background: url("/static/images/bg.png") repeat center;
             padding-right: 5%;
             padding-left: 10%;
         }
 
-        #data_user{
+        #data_user {
             padding-bottom: 5%;
             padding-top: 2%;
             background: url("/static/images/tbg.png") repeat center;
@@ -54,59 +56,65 @@
         .page-link {
             color: black !important;
         }
+
         .table td {
             vertical-align: middle;
             border: none !important;
             padding: 0.3%;
             font-weight: normal !important;
         }
-        .table th{
+
+        .table th {
             vertical-align: middle;
             border: none !important;
             font-weight: normal !important;
         }
     </style>
 </head>
+
 <body>
-{% raw xsrf_form_html() %}
+    {% raw xsrf_form_html() %}
 
-<nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse">
         <div class="container">
-            <a class="navbar-brand" href="/" style="color: green"><h5>竹萌</h5></a>
+            <a class="navbar-brand" href="/" style="color: green">
+                <h5>竹萌</h5>
+            </a>
         </div>
-</nav>
+    </nav>
 
-<div class="jumbotron">
-    <input type="hidden" id="uuid" value="{{ uuid }}"/>
-    <div class="container">
-        <div id="data_user">
-        <h3 style="color:#fff">{{ uname }}</h3>
-        <div class="table-responsive" id="tablehead">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>流水时间</th>
-                    <th>流水金额</th>
-                    <th>当时金额</th>
-                    <th>所在服务器</th>
-                </tr>
-                </thead>
-                <tbody id="userlist">
-                <tr>
-                    <td>@@rowsnumber@@</td>
-                    <td>@eventtime</td>
-                    <td>@je</td>
-                    <td>@oldevent</td>
-                    <td>@servercode</td>
-                </tr>
-                </tbody>
-            </table>
+    <div class="jumbotron">
+        <input type="hidden" id="uuid" value="{{ uuid }}" />
+        <div class="container">
+            <div id="data_user">
+                <h3 style="color:#fff">{{ uname }}</h3>
+                <div class="table-responsive" id="tablehead">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>流水时间</th>
+                                <th>流水金额</th>
+                                <th>当时金额</th>
+                                <th>所在服务器</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userlist">
+                            <tr>
+                                <td>@@rowsnumber@@</td>
+                                <td>@eventtime</td>
+                                <td>@je</td>
+                                <td>@oldevent</td>
+                                <td>@servercode</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
+            </nav>
         </div>
     </div>
-        <nav aria-label="Page navigation" style="text-align: center;" id="pageination">
-        </nav>
-    </div>
-</div>
 </body>
+
 </html>

@@ -70,23 +70,26 @@
             padding: 0.3%;
             font-weight: normal !important;
         }
-        .table th{
+
+        .table th {
             vertical-align: middle;
             border: none !important;
             font-weight: normal !important;
         }
+
         .table {
             margin-bottom: 0;
             color: #fff;
             padding-left: 5%;
         }
+
         #tablehead {
             background: url("/static/images/bg.png") repeat center;
             padding-right: 5%;
             padding-left: 10%;
         }
 
-        #data_user{
+        #data_user {
             padding-bottom: 5%;
             padding-top: 5%;
             background: url("/static/images/tbg.png") repeat center;
@@ -95,7 +98,6 @@
         .col-md-6 {
             padding-bottom: 2%;
         }
-
     </style>
 </head>
 
@@ -143,37 +145,37 @@
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 在线时长
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in zxsc %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ i["sc"] }}</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in zxsc %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ i["sc"] }}</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 钻石矿开采
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in zskkc %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in zskkc %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ i["cs"] }}块</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -181,37 +183,37 @@
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 鞘翅飞行
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in qcfx %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in qcfx %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 石头开采
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in stkc %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in stkc %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ i["cs"] }}块</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -219,37 +221,37 @@
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 行走距离
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in walk %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in walk %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 骑马移动距离
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in horseOneCm %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in horseOneCm %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -257,37 +259,37 @@
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 生物击杀次数
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in mobKills %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ i["cs"] }}次</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in mobKills %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ i["cs"] }}次</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 骑猪移动距离
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in pigOneCm %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in pigOneCm %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ int(i["cs"])/100 }}米</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -295,93 +297,93 @@
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 石英矿开采数
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in minequartz_ore %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in minequartz_ore %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ i["cs"] }}块</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="rank-mc">
                                 粘土块开采数
-                                    <div class="table-responsive" id='tablehead'>
-                                        <table class="table">
-                                            <tbody>
-                                                {% for i in mineclay %}
-                                                <tr>
-                                                    <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
-                                                        {{ i["uname"] }}</td>
-                                                    <td id="rank_sq">{{ i["cs"] }}块</td>
-                                                </tr>
-                                                {% end %}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="table-responsive" id='tablehead'>
+                                    <table class="table">
+                                        <tbody>
+                                            {% for i in mineclay %}
+                                            <tr>
+                                                <td id="rank_id" onclick="lookinfo('{{ i["id"] }}')">
+                                                    {{ i["uname"] }}</td>
+                                                <td id="rank_sq">{{ i["cs"] }}块</td>
+                                            </tr>
+                                            {% end %}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="friend">
                     <div id="data_user">
-                    <div class="table-responsive" id="tablehead">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>用户名</th>
-                                    <th>初次登陆时间</th>
-                                    <th>最后离线时间</th>
-                                    <th>数据更新日期</th>
-                                </tr>
-                            </thead>
-                            <tbody id="userlist">
-                                <tr onclick="lookinfo('@id')" style="cursor: pointer;">
-                                    <td>@@rowsnumber@@</td>
-                                    <td>@uname</td>
-                                    <td>@firstplayed</td>
-                                    <td>@lastplayed</td>
-                                    <td>@updatetime</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive" id="tablehead">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>用户名</th>
+                                        <th>初次登陆时间</th>
+                                        <th>最后离线时间</th>
+                                        <th>数据更新日期</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userlist">
+                                    <tr onclick="lookinfo('@id')" style="cursor: pointer;">
+                                        <td>@@rowsnumber@@</td>
+                                        <td>@uname</td>
+                                        <td>@firstplayed</td>
+                                        <td>@lastplayed</td>
+                                        <td>@updatetime</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
                     <nav aria-label="Page navigation" id="pageination">
                     </nav>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="menoylog">
-                        <div id="data_user">
-                    <div class="table-responsive" id="tablehead">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>序号</th>
-                                    <th>用户名</th>
-                                    <th onclick="px('money', this)" style="cursor: pointer;">当前存款<span></span></th>
-                                    <th onclick="px('monout', this)" style="cursor: pointer;">总支出<span></span></th>
-                                    <th onclick="px('monin', this)" style="cursor: pointer;">总收入<span></span></th>
-                                </tr>
-                            </thead>
-                            <tbody id="menoyuserlist">
-                                <tr onclick="lookmenoy('@uuid')" style="cursor: pointer;">
-                                    <td>@@rowsnumber@@</td>
-                                    <td>@player</td>
-                                    <td>@money</td>
-                                    <td>@monout</td>
-                                    <td>@monin</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="data_user">
+                        <div class="table-responsive" id="tablehead">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>用户名</th>
+                                        <th onclick="px('money', this)" style="cursor: pointer;">当前存款<span></span></th>
+                                        <th onclick="px('monout', this)" style="cursor: pointer;">总支出<span></span></th>
+                                        <th onclick="px('monin', this)" style="cursor: pointer;">总收入<span></span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="menoyuserlist">
+                                    <tr onclick="lookmenoy('@uuid')" style="cursor: pointer;">
+                                        <td>@@rowsnumber@@</td>
+                                        <td>@player</td>
+                                        <td>@money</td>
+                                        <td>@monout</td>
+                                        <td>@monin</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <nav aria-label="Page navigation" id="menoypageination">
                     </nav>
