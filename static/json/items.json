@@ -1,7 +1,6 @@
 {
     "lang_en": {
-        "minecraft:items": [
-            {
+        "minecraft:items": [{
                 "readable": "Stone",
                 "id": "minecraft:stone",
                 "texture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAALVBMVEUAAAA7OztAQEBWVlZeXl50dHR/f39qampISEiPj49NTU00NDRoaGiAgIBBQUFWXyGYAAAAAXRSTlMAQObYZgAAAUdJREFUeF51jjFrwzAUhP0XniZDJmkSGLpIIPAqgaG7DIasfmBwJxkE2azJ0FkB7YZCx0yFzs3vqkQIJENuu093T1e9Eo7PfopDfPSpP89DenjHDzyOw3D31/ForR3Ge2vsx+zTbPv5r3iL1k4Rj4hxwD4DbW3OXCc72YgkAyNSLqQ42IRAM3j3HaLtp5gwBJZB1/oTJjuc8XPjpAAj3GLHOPOVwGcGyu3KC0TYarqFDJwWi9wl3SDU6++tInSnGVyA8JIwGShhGgbkQnlJOLV8eclXILQuCa2ENOrE84WftQDjpN7dN30DEkgZtjtncqumpOGh7NDat517Dw009W2pMK1UC1/rQ4Ct3GhFp5ynsOXtJSG0Ucti2Mrqw8qqrFYI1xnGADhkm+VlK04XYOXTm0xnJK2h+DvRntOtepCQDKonGahe6B/7Hmuy2OXaXQAAAABJRU5ErkJggg=="
@@ -4384,8 +4383,7 @@
         ]
     },
     "lang_cn": {
-        "minecraft:items": [
-            {
+        "minecraft:items": [{
                 "readable": "石头",
                 "id": "minecraft:stone",
                 "texture": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAALVBMVEUAAAA7OztAQEBWVlZeXl50dHR/f39qampISEiPj49NTU00NDRoaGiAgIBBQUFWXyGYAAAAAXRSTlMAQObYZgAAAUdJREFUeF51jjFrwzAUhP0XniZDJmkSGLpIIPAqgaG7DIasfmBwJxkE2azJ0FkB7YZCx0yFzs3vqkQIJENuu093T1e9Eo7PfopDfPSpP89DenjHDzyOw3D31/ForR3Ge2vsx+zTbPv5r3iL1k4Rj4hxwD4DbW3OXCc72YgkAyNSLqQ42IRAM3j3HaLtp5gwBJZB1/oTJjuc8XPjpAAj3GLHOPOVwGcGyu3KC0TYarqFDJwWi9wl3SDU6++tInSnGVyA8JIwGShhGgbkQnlJOLV8eclXILQuCa2ENOrE84WftQDjpN7dN30DEkgZtjtncqumpOGh7NDat517Dw009W2pMK1UC1/rQ4Ct3GhFp5ynsOXtJSG0Ucti2Mrqw8qqrFYI1xnGADhkm+VlK04XYOXTm0xnJK2h+DvRntOtepCQDKonGahe6B/7Hmuy2OXaXQAAAABJRU5ErkJggg=="

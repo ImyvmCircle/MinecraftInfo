@@ -104,8 +104,8 @@ class loadMenoyUserListHandler(RequestHandler):
         orderbylx = ' order by money desc'
 
         sql = """select *,player_uuid as uuid,
-                ifnull((select sum(oldevent - newevent) from inventory.eventlog where newevent<oldevent and uuid=a.player_uuid ),0) as monout,
-                ifnull((select sum(newevent - oldevent) from inventory.eventlog where newevent>=oldevent and uuid=a.player_uuid),0) as monin
+                ifnull((select ROUND(sum(oldevent - newevent), 2) from inventory.eventlog where newevent<oldevent and uuid=a.player_uuid ),0) as monout,
+                ifnull((select ROUND(sum(newevent - oldevent), 2) from inventory.eventlog where newevent>=oldevent and uuid=a.player_uuid),0) as monin
                 from inventory.eco_accounts a where 1=1"""
         tsql = "select count(*) as num from inventory.eco_accounts where 1=1"
 
@@ -134,7 +134,7 @@ class moneyInfoHandler(RequestHandler):
         rows = int(self.get_argument('rows'))
         uuid = self.get_argument("uuid")
         sqlwhere = ""
-        sql = """select *,newevent - oldevent as je from inventory.eventlog a where newevent!=oldevent and uuid='%s'""" % uuid
+        sql = """select *,ROUND(newevent - oldevent, 2) as je from inventory.eventlog a where newevent!=oldevent and uuid='%s'""" % uuid
         tsql = "select count(*) as num from inventory.eventlog where newevent!=oldevent and uuid='%s'" % uuid
 
         total = sqlreadone(tsql + sqlwhere)["num"]
