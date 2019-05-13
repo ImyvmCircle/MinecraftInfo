@@ -65,7 +65,7 @@ def loaduser(self=None):
 
             if uuid in users:
                 uname = sqlreadone("select player from inventory.eco_accounts where player_uuid='%s'" % uuid)
-                if "player" not in uname: 
+                if userobj["lastKnownName"] not in uname: 
                     uname = userobj["lastKnownName"]
                 else:
                     uname = uname["player"]
@@ -183,19 +183,6 @@ def saveuser(activeuser, self=None):
             userid = users[uuid]["id"]
             with open(os.path.join(STATS_DIR, fp)) as file:
                 infos = json.loads(file.read())
-                # for num, i in enumerate(infos):
-                #     ss = sqlreadone("select * from t_user_action where pid='%s' and lx='%s'" % (userid, i))
-                #     if "id" not in ss:
-                #         item = [{"tablename": "t_user_action", "type": "insert", "name": "id", "value": get_serial()},
-                #                 {"name": "pid", "value": userid},
-                #                 {"name": "lx", "value": i},
-                #                 {"name": "cs", "value": infos[i]},
-                #                 ]
-                #     else:
-                #         item = [{"tablename": "t_user_action", "type": "update", "itemid": "id", "value": ss["id"]},
-                #                 {"name": "cs", "value": infos[i]},
-                #                 ]
-                #     items.append(item)
                 ss = sqlreadone("select * from t_user_stats where id='%s'" % (userid))
                 if "id" not in ss:
                     item = [{"tablename": "t_user_stats", "type": "insert", "name": "id",
